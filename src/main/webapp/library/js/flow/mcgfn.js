@@ -647,50 +647,48 @@ function initFunc() {
 	});
 	$('#flowExpBtn').click(function(){
 		delAll();
+		//below code turn to callback function
 		//export data here
-		acquireConnectors();
-		if(!flowIsLegal()){
-			alert("check is there a loop exist which would occurs error");
-			return;
-		}
-		acquireInput();
-		var form = $("<form>");
-		form.attr("style", "display:none");
-		form.attr("target", "");
-		form.attr("method", "post");
-		form.attr("action", baseUrl + "/tool/down");
-		var  mapArray = elementMap.keySet();
-		if(mapArray.length > 0) {
-			var index = 0 ;
-			while(index < mapArray.length) {
-				var value = elementMap.get(mapArray[index++]);
-				var flowIdInput = $("<input>");
-				flowIdInput.attr("type", "hidden");
-				flowIdInput.attr("name", "flowId_" + index);
-				flowIdInput.attr("value", value.getId());
-				form.append(flowIdInput);
-			}
-		}
-		var flowIdInput = $("<input>");
-		flowIdInput.attr("type","hidden");
-		flowIdInput.attr("name","length");
-		flowIdInput.attr("value",mapArray.length);
-		form.append(flowIdInput);
-
-		var flowIdInput = $("<input>");
-		flowIdInput.attr("type","hidden");
-		flowIdInput.attr("name","flowId");
-		flowIdInput.attr("value",$("#flowSelect").attr("flowId"));
-		form.append(flowIdInput);
-		var flowNameInput = $("<input>");
-		flowNameInput.attr("type","hidden");
-		flowNameInput.attr("name","flowName");
-		flowNameInput.attr("value",$("#flowSelect").attr("flowName"));
-		form.append(flowNameInput);
-		$("body").append(form);
-
-		form.submit();
-		form.remove();
+		// acquireConnectors();
+		// flowIsLegal(success,fail);
+		// acquireInput();
+		// var form = $("<form>");
+		// form.attr("style", "display:none");
+		// form.attr("target", "");
+		// form.attr("method", "post");
+		// form.attr("action", baseUrl + "/tool/down");
+		// var  mapArray = elementMap.keySet();
+		// if(mapArray.length > 0) {
+		// 	var index = 0 ;
+		// 	while(index < mapArray.length) {
+		// 		var value = elementMap.get(mapArray[index++]);
+		// 		var flowIdInput = $("<input>");
+		// 		flowIdInput.attr("type", "hidden");
+		// 		flowIdInput.attr("name", "flowId_" + index);
+		// 		flowIdInput.attr("value", value.getId());
+		// 		form.append(flowIdInput);
+		// 	}
+		// }
+		// var flowIdInput = $("<input>");
+		// flowIdInput.attr("type","hidden");
+		// flowIdInput.attr("name","length");
+		// flowIdInput.attr("value",mapArray.length);
+		// form.append(flowIdInput);
+		//
+		// var flowIdInput = $("<input>");
+		// flowIdInput.attr("type","hidden");
+		// flowIdInput.attr("name","flowId");
+		// flowIdInput.attr("value",$("#flowSelect").attr("flowId"));
+		// form.append(flowIdInput);
+		// var flowNameInput = $("<input>");
+		// flowNameInput.attr("type","hidden");
+		// flowNameInput.attr("name","flowName");
+		// flowNameInput.attr("value",$("#flowSelect").attr("flowName"));
+		// form.append(flowNameInput);
+		// $("body").append(form);
+		//
+		// form.submit();
+		// form.remove();
 
 	});
 	$('#flowClearBtn').click(function(){
@@ -1049,9 +1047,10 @@ function addHoverDom(treeId, treeNode) {
     var btn = $("#addBtn_"+treeNode.tId);
     if (btn) {
         btn.bind("click", function(){
-            var zTree = $.fn.zTree.getZTreeObj("flowTree");
-            var newNode = zTree.addNodes(treeNode, {id:Math.uuid(), pId:treeNode.id, name:"请输入名称"});
-            zTree.editName(newNode[0]);
+            // var zTree = $.fn.zTree.getZTreeObj("flowTree");
+            // var newNode = zTree.addNodes(treeNode, {id:Math.uuid(), pId:treeNode.id, name:"请输入名称"});
+            // zTree.editName(newNode[0]);
+			alert("you are not supposed to use this function because the flow changing will miss current flow data");
             return false;
         });
     }
@@ -1184,7 +1183,7 @@ function nodeSelected(treeNode) {
 	$("#flowSelect").attr("flowId", treeNode.id);
 	$("#flowSelect").attr("flowName", treeNode.name);
 	$("#flowSelect").attr("flowPid", treeNode.pId);
-	clearAll($("#flowarea"));
-	initFlowData($("#flowSelect").attr("flowId"));
+	// clearAll($("#flowarea"));
+	// initFlowData($("#flowSelect").attr("flowId"));
 }
 /*------------------流程树方法结束 ---------------------*/

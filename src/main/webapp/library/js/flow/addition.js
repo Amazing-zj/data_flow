@@ -244,7 +244,7 @@ function acquireConnectors() {
  * DATE : 2019/11/11 9:49
  * AUTHOR : UDEAN
  */
-function flowIsLegal() {
+function flowIsLegal(success, fail) {
     common.ajax(
         {
             "url" : "/connect/legal",
@@ -257,20 +257,71 @@ function flowIsLegal() {
                     type: "success",
                     hideAfter: 5,
                     showCloseButton: true
-                })
-                return true;
+                });
+                success();
             }else{
                 Messenger().post({
                     message: "flow illegal",
                     type: "error",
                     hideAfter: 5,
-                    showCloseButton: false
-                })
-                return false;
+                    showCloseButton: true
+                });
+                fail();
             }
         }
     )
+
 }
+/**
+ * DESC : callback function for legal check
+ * DATE : 2019/12/3 9:11
+ * AUTHOR : UDEAN
+ */
+function fail() {
+    alert("check is there a loop exist which would occurs error");
+}
+
+function success() {
+    acquireInput();
+    var form = $("<form>");
+    form.attr("style", "display:none");
+    form.attr("target", "");
+    form.attr("method", "post");
+    form.attr("action", baseUrl + "/tool/down");
+    var  mapArray = elementMap.keySet();
+    if(mapArray.length > 0) {
+        var index = 0 ;
+        while(index < mapArray.length) {
+            var value = elementMap.get(mapArray[index++]);
+            var flowIdInput = $("<input>");
+            flowIdInput.attr("type", "hidden");
+            flowIdInput.attr("name", "flowId_" + index);
+            flowIdInput.attr("value", value.getId());
+            form.append(flowIdInput);
+        }
+    }
+    var flowIdInput = $("<input>");
+    flowIdInput.attr("type","hidden");
+    flowIdInput.attr("name","length");
+    flowIdInput.attr("value",mapArray.length);
+    form.append(flowIdInput);
+
+    var flowIdInput = $("<input>");
+    flowIdInput.attr("type","hidden");
+    flowIdInput.attr("name","flowId");
+    flowIdInput.attr("value",$("#flowSelect").attr("flowId"));
+    form.append(flowIdInput);
+    var flowNameInput = $("<input>");
+    flowNameInput.attr("type","hidden");
+    flowNameInput.attr("name","flowName");
+    flowNameInput.attr("value",$("#flowSelect").attr("flowName"));
+    form.append(flowNameInput);
+    $("body").append(form);
+
+    form.submit();
+    form.remove();
+}
+
 
 /**
  * DESC : delete out time connector cache
@@ -323,6 +374,9 @@ function delAll() {
                     hideAfter: 5,
                     showCloseButton: true
                 })
+            }else{
+                acquireConnectors();
+                flowIsLegal(success,fail);
             }
         }
     )

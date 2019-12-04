@@ -21,9 +21,10 @@ $(function () {
 	var tabState = {
 			"mcg_home":true,
 			"mcg_flow":true,
-			"mcg_wonton":true
+			"mcg_wonton":true,
+			"mcg_compiler": true
 	};
-	loadNavBody("mcg_flow_first");
+	loadNavBody("mcg_flow");
     $("#mcgTab a[href='#mcg_home']").on("shown.bs.tab", function (e) {
     	if(tabState.mcg_home) {
     		loadNavBody("mcg_home");
@@ -40,7 +41,17 @@ $(function () {
     		tabState.mcg_flow = false;
     	}
     	
-    });	
+    });
+    $("#mcgTab a[href ='#mcg_compiler']").on("shown.bs.tab",function(e){
+    	if(tabState.mcg_compiler){
+    		setAutoHeight($("body"),500);
+    		loadNavBody("mcg_compiler");
+    		tabState.mcg_compiler = false;
+		}
+    	if(tabState.mcg_flow){
+    		removePopover();
+		}
+	});
     $("#mcgTab a[href='#mcg_wonton']").on("shown.bs.tab", function (e) {
     	if(tabState.mcg_wonton) {
     		setAutoHeight($("body"),500);
@@ -68,6 +79,8 @@ function loadNavBody(id) {
 		url = "/flow/index";
 	} else if(id == "mcg_wonton") {
 		url = "/wonton/index";
+	} else if(id === "mcg_compiler"){
+		url = "/compiler";
 	} else {
 		return ;
 	}

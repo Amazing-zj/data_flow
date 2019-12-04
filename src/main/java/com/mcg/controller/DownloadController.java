@@ -21,14 +21,14 @@ import java.io.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mcg.entity.flow.text.FlowText;
+import com.mcg.plugin.ehcache.CachePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mcg.common.Constants;
-import com.mcg.plugin.endesign.Des;
-import com.mcg.util.LevelDbUtil;
 
 /**
  * 
@@ -82,18 +82,33 @@ public class DownloadController {
 	
     @RequestMapping("downloadFlow")
     public String downloadFlow(String flowId, String fileName, HttpServletRequest request, HttpServletResponse response) {
-        
+
         response.setCharacterEncoding(Constants.CHARSET.toString());
-        response.setContentType("multipart/form-data");
+        response.setContentType("multipart/form-data"); //call browser download function using MIME protocol
         response.setHeader("Content-Disposition", "attachment;fileName=" + convertCharacterEncoding(request, fileName));
         OutputStream os = null;
-        System.out.println(request.toString());
-        
+        String []str = request.getQueryString().split("&");
+        String id = str[0].substring(7);
+        int len = str.length - 2;
+        int index = 0;
         try {
             os = response.getOutputStream();
-            Des des = new Des(Constants.DES_KEY);
-            byte[] bytes = des.encrypt(LevelDbUtil.get(flowId.getBytes(Constants.CHARSET)));
-            os.write(bytes);
+            byte [] newline = "\n".getBytes(Constants.CHARSET);
+            for(;index<len; index++) {
+                String t_str = str[2+index].substring(9);
+                FlowText text = CachePlugin.getFlowEntity(id , t_str);
+                if(text != null) {
+                    os.write(text.getTextId().getBytes(Constants.CHARSET));
+                    os.write(newline);
+                    os.write(text.getTextCore().getSource().getBytes(Constants.CHARSET));
+                    os.write(newline);
+//                    os.write(t_str.getBytes(Constants.CHARSET));
+//                    os.write(newline);
+                }
+            }
+//              Des des = new Des(Constants.DES_KEY);
+//            byte[] bytes = des.encrypt(LevelDbUtil.get(flowId.getBytes(Constants.CHARSET)));
+//            os.write(bytes);
             os.close();
         }catch (Exception e) {
         	logger.error("导入流程文件出错，异常信息：{}", e.getMessage());

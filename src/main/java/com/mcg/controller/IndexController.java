@@ -46,5 +46,14 @@ public class IndexController extends BaseController {
         mv.setViewName("index");
         return mv;
     }
+
+
+    @RequestMapping(value = "/compiler", method = RequestMethod.GET)
+    public ModelAndView getCompiler() throws Exception{
+        ModelAndView mv = this.getModelAndView();
+        mv.addObject("version",Constants.VERSION);
+        mv.setViewName("/compiler/index");
+        return mv;
+    }
       
 }

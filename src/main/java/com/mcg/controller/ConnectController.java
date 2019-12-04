@@ -1,8 +1,6 @@
 package com.mcg.controller;
 
 
-import Utils.SpendTime;
-import com.alibaba.fastjson.JSONObject;
 import com.mcg.common.sysenum.LogTypeEnum;
 import com.mcg.entity.common.McgResult;
 import com.mcg.entity.flow.connector.ConnectorData;
@@ -90,20 +88,67 @@ public class ConnectController {
         McgResult result = new McgResult();
         result.setStatusCode(1);
         for(Map.Entry<ConnectorData, Integer> t : map.entrySet()){
-            if(!ConnectorCache.removr(t.getValue())){
+            if(!ConnectorCache.remove(t.getValue())){
                 logger.debug("error occur "+ t.getKey().toString());
                 result.setStatusCode(0);
                 // add remove failed deal method here
+                if(removeAll()){
+                    result.setStatusCode(2);
+                }else{
+                    removeCache();
+                }
                 break;
             }
         }
+        Object[] indexMapArray = indexMap.keySet().toArray();
+        Object [] mapArray = map.keySet().toArray();
+        try {
+            int i = 0;
+            while( i < indexMapArray.length){
+                indexMap.remove(indexMapArray[i++]);
+            }
+            i = 0;
+            while(i < mapArray.length){
+                map.remove(mapArray[i++]);
+            }
+        }catch (Exception e){
+          logger.debug(e.getClass() + e.getMessage());
+        }
+        if(map.size() != indexMap.size() || map.size() != 0){
+            logger.debug("map size: "+map.size()+" index size : "+indexMap.size());
+        }
         return result;
+    }
+
+    private void removeCache(){
+           new Thread(new RemoveCacheThread()).start();
+    }
+
+    private static class RemoveCacheThread implements Runnable{
+        @Override
+        public void run() {
+            int count = 5000;
+            while(count-->0){
+                ConnectorCache.removeAll();
+                if(ConnectorCache.isNull()){
+                    break;
+                }
+            }
+            if(count == 0){
+                logger.debug("remove cache failed after 5000 times attempt");
+            }
+        }
+    }
+
+    private boolean removeAll(){
+        ConnectorCache.removeAll();
+        return ConnectorCache.isNull();
     }
 
     private boolean del (ConnectorData connectorData){
         int i = map.get(connectorData);
         map.remove(connectorData);
-        if( !ConnectorCache.removr(i)){
+        if( !ConnectorCache.remove(i)){
             return false;
         }else{
             return true;
@@ -114,7 +159,7 @@ public class ConnectController {
     @ResponseBody
     public McgResult isLegal(){
         McgResult result = new McgResult();
-        if(isIllegal()){
+        if(map.size() > 1 && isIllegal()){
             result.setStatusCode(0);
         }else{
             result.setStatusCode(1);
@@ -250,6 +295,60 @@ public class ConnectController {
             }
         }
         return result;
+    }
+
+    @RequestMapping(value = "/output", method = RequestMethod.POST)
+    @ResponseBody
+    public McgResult getOutputData(String []source, String []Type, String []Name){
+        McgResult result = new McgResult();
+        result.setStatusCode(1);
+
+        return result;
+    }
+
+    private void inputPersistent(String []source, String []target, String []input){
+
+    }
+
+    private void outputPersistent(String []source, String []Type, String []name){
+
+    }
+
+    private boolean TP(int a[][]){
+        int []state  = new int [a.length] ;
+        for(int i = 0 ; i < a.length  ; i++){
+            for(int j = 0 ; j < a.length ; i++){
+                if(a[i][j]==1){
+                    state[j]++;
+                }
+            }
+        }
+        List<Integer>list = new LinkedList<>();
+        for(int i = 0 ; i < a.length ; i++){
+            if(state[i] == 0)
+                list.add(i);
+        }
+        if(list.size() == 0)
+            return false;
+        int count = list.size();
+        do{
+            List<Integer> temp = new LinkedList<>();
+            for(int i : list){
+                for(int j = 0 ; j<a.length ;j++){
+                    if(a[j][i]==1 && --state[j] == 0)
+                    {
+                        count ++;
+                        temp.add(j);
+                    }
+                }
+            }
+            list = temp;
+        }while(list.size()!=0);
+        if(count == a.length) {
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

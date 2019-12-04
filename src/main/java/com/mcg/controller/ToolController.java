@@ -24,7 +24,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import Utils.SpendTime;
+//import Utils.SpendTime;
 import com.mcg.entity.flow.connector.ConnectorData;
 import com.mcg.entity.flow.text.FlowText;
 import com.mcg.entity.flow.text.TextCore;
@@ -76,7 +76,7 @@ public class ToolController extends BaseController {
             modeAndView.addObject("fileName", pd.getString("flowName") + Constants.EXTENSION);
         }
         int len =Integer.valueOf( (String)pd.get("length"));
-        int i = 1;
+		int i = 1;
         Set<FlowText> set = new HashSet<>();
         while( i <= len ){
         	if(pd.get(Constants.ID_PREX+i) != null) {
@@ -88,10 +88,49 @@ public class ToolController extends BaseController {
         	}
         	i++;
 		}
-        FileWriter fw;
-        BufferedWriter bw;
-		SpendTime time = new SpendTime();
-		time.clockUp();
+        saveOrTrans(set);
+        return modeAndView;
+    }
+
+    private void saveOrTrans(Set<FlowText> set){
+		saveData(set);
+	}
+
+	private void codeTrans(Set<FlowText> set){
+		FileWriter fw;
+		BufferedWriter bw;
+//		SpendTime time = new SpendTime();
+//		time.clockUp();
+		try {
+			fw = new FileWriter(new File("E://recovery//persistent.txt"));
+			bw = new BufferedWriter(fw);
+			if (set.size() != 0) {
+				for (FlowText temp : set) {
+					StringBuffer t_StrBuff = new StringBuffer("void ");
+
+					TextProperty property = temp.getTextProperty();
+					TextCore core = temp.getTextCore();
+					bw.write(temp.getTextId());
+					bw.write(property.getName() + " " + property.getKey());
+					bw.write(core.getSource());
+				}
+			}
+			bw.flush();
+
+			bw.close();
+			fw.close();
+//			time.clockOver();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	private void saveData(Set<FlowText> set){
+		FileWriter fw;
+		BufferedWriter bw;
+//		SpendTime time = new SpendTime();
+//		time.clockUp();
 		try {
 			fw = new FileWriter(new File("E://recovery//persistent.txt"));
 			bw = new BufferedWriter(fw);
@@ -112,13 +151,12 @@ public class ToolController extends BaseController {
 
 			bw.close();
 			fw.close();
-			time.clockOver();
+//			time.clockOver();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-        return modeAndView;
-    }
+	}
 
 	public static void cachePersistent(int a[], BufferedWriter bw) throws Exception {
 		boolean failed = false;
@@ -129,7 +167,7 @@ public class ToolController extends BaseController {
 				ConnectorData data = ConnectorCache.get(i);
 				bw.write(data.getSourceId() + " " + data.getTargetId());
 				bw.newLine();
-				if (!ConnectorCache.removr(i) && !failed) {
+				if (!ConnectorCache.remove(i) && !failed) {
 					failed = true;
 					logger.error("remove connector cache failed");
 				}
