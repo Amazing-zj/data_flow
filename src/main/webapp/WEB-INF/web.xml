@@ -28,9 +28,9 @@
     
     <!-- tomcat等 启动之前执行 -->
 	<filter>
-		<filter-name>startFilter</filter-name>
-		<filter-class>com.mcg.filter.StartFilter</filter-class>
-	</filter>    
+	<filter-name>startFilter</filter-name>
+	<filter-class>com.mcg.filter.StartFilter</filter-class>
+</filter>
       
 	<!-- Spring MVC servlet -->
 	<servlet>
@@ -69,7 +69,7 @@
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsp</location>
-	</error-page>			
+	</error-page>
     
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>

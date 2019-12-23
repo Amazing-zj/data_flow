@@ -18,40 +18,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" type="image/png" href="../../img/favicon.png">
-    <title>mcg-helper研发助手</title>
+    <title>flow_compiler</title>
 
     <script type="text/javascript" src="<%=basePath %>/library/js/flow/mcgfn.js?_v=${version}"></script>
     <script type="text/javascript" src="<%=basePath %>/library/js/flow/addition.js?_v=${version}"></script>
     <script>
-        function getObjectURL(file){
-            if(file == "" || file == undefined || file == NaN){
-                alert("file path error");
-                return;
-            }
-            if(window.createObjectURL != undefined){
-                return window.createObjectURL(file);
-            }
-            if(window.webkitURL.createObjectURL != undefined){
-                return window.webkitURL.createObjectURL(file);
-            }
-        }
+        var seed = Math.random();
+        var text = "";
         $(document).ready(function () {
-            $("#select").change(function() {
+            $("#select").change(function() { // TODO: 2019/12/6 15:27 not react if select the same file
+                text = "";
                 var file = this.files[0];
                 if (file == undefined || file == " ") {
-                $("#code").text("");
+                    $("#code").text("");
+                    $("#code").children(" p ").each(function () {
+                        $(this).remove();
+                    })
                 }
                 var reader = new FileReader();
                 reader.readAsText(file);
                 reader.onload = function () {
-                    $("#code").text(this.result);
+                    var strList = this.result.split("\n");
+                    var len = strList.length;
+                    $("#code").children(" p ").each(function () {
+                        $(this).remove();
+                    })
+                    for(var i = 0 ;i <len ; i++){
+                        text += strList[i];
+                         $("#code").append("<p>" +strList[i]+"</p>");
+                    }
                 };
             });
             $("#compiler").bind("click",function () {
-               var target = "target.c";
+                var form = $("<form>");
+                form.attr("style", "display:none");
+                form.attr("method", "post");
+                form.attr("action", baseUrl + "/tool/compiler");
+                var flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","text");
+                flowIdInput.attr("value",text);
+                alert(text);
+                form.append(flowIdInput);
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","random");
+                flowIdInput.attr("value",seed);
+                form.append(flowIdInput)
+                $("#compiler").append(form);
+
+                form.submit();
+                form.remove();
             });
         });
-
     </script>
 </head>
 
@@ -69,8 +88,8 @@
         </div>
     </div>
     <%--            code preview--%>
-    <div style="width: 100% ;height: 80% ;background: #5bc0de; clear: both; overflow: scroll" >
-        <p style="width: 100% ;height:100% " id = "code" name = "code"></p>
+    <div style="width: 100% ;height: 80% ;background: #5bc0de; clear: both; overflow: scroll" id = "code" >
+        <p style="width: 100% ;height:100% "  name = "code"></p>
     </div>
 </div>
 <!-- 主面body结束 -->

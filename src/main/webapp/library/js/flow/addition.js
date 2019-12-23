@@ -1,6 +1,35 @@
 
 /---------------test-------------------/
+var tempList =[];
+function testOutputMap(sourceId){
+    var target = targetMap.get(sourceId);
+    if(target != undefined) {
+        tempList = [];
+        for(var i = 0 ; i < target.length ; i++){
+            tempList.push(sourceId+target[i]);
+        }
+    }else{
+        return null;
+    }
+}
 
+/**
+ * DESC : search file fake position (cache position)
+ * DATE : 2019/12/17 11:00
+ * AUTHOR : UDEAN
+ */
+function getObjectURL(file){
+    if(file == "" || file == undefined || file == NaN){
+        alert("file path error");
+        return;
+    }
+    if(window.createObjectURL != undefined){
+        return window.createObjectURL(file);
+    }
+    if(window.webkitURL.createObjectURL != undefined){
+        return window.webkitURL.createObjectURL(file);
+    }
+}
 
 function showAllDiv(){
     $("#flowarea").children("div[data-toggle='popover']").each(function (){
@@ -33,6 +62,7 @@ function showPopover(id){
     $("#"+id).popover("show");
 }
 
+/-----------finished----------/
 
 function suspendConnector(operate) {
     var id = baseMap.get("selector");
@@ -42,6 +72,7 @@ function suspendConnector(operate) {
         createConnectorHtmlModal(id, null);
     }else if (operate == "delete") {
         baseMap.get("instance").detach(instanceMap.get(id)); //remove connector
+        deleteInput(id); //remove input map data and backup data
         removePopover();
         removeElement(id) //remove binding popover
         removeConnector(id.substr(0,36),id); // remove connector cache data
@@ -82,49 +113,125 @@ function createConnectorHtmlModal(id, param) {
     common.showAjaxDialog(url, setDialogBtns(param), createModalCallBack, null, param);
 }
 
+/**
+ * DESC : delete input map data when remove connector
+ * DATE : 2019/12/5 14:09
+ * AUTHOR : UDEAN
+ */
+function deleteInput(id) {
+    var cid = id.substr(0,18) + id.substr(36,18);
+    InputMap.remove(cid);
+    common.ajax({
+        "url":"/connect/delInput",
+        "type":"get",
+        "data":"source="+id.substr(0,18)+"&target="+id.substr(36,18)
+    })
+}
 
-/-----------finished----------/
+/**
+ * DESC :
+ * DATE : 2019/12/11 15:55
+ * AUTHOR : UDEAN
+ */
+function deleteOutput(id) {
+    var sid = id.substr(0,18);
+    OutputMap.remove(sid);
+    common.ajax({
+        "url" : "/connect/delOutput",
+        "type":"get",
+        "data":"source="+sid
+    })
+}
+
+/**
+ * DESC : update input map when relative output save
+ * DATE : 2019/12/5 11:28
+ * AUTHOR : UDEAN
+ */
+function  initInputMap(id, cons) {
+    var tList = targetMap.get(id);
+    if(tList == undefined){
+        return;
+    }
+    for(var i = 0 ; i < tList.length; i++){
+        var cid = id + tList[i];
+        InputMap.put(cid, cons);
+    }
+}
+
+/**
+ * DESC : send output data
+ * DATE : 2019/12/4 18:42
+ * AUTHOR : UDEAN
+ */
+function acquireOutput(cid, cons){
+    var nList = cons.getName();
+    if(nList.length == 0){
+        common.ajax({
+            "url":"connect/delOutput",
+            "type":"get",
+            "data":"source="+cid
+        })
+    }else{
+        var tList = cons.getType();
+        var source = cid;
+        var outName = "";
+        var outType = ""
+        for (var i = 0; i < tList.length; i++) {
+            outName += nList[i]+",";
+            outType += tList[i]+",";
+        }
+        outName = outName.substr(0,outName.length-1);
+        outType = outType.substr(0,outType.length-1)
+        common.ajax(  {
+                "url" : "/connect/output",
+                "type" : "post",
+                "data" : "source="+source+"&Name="+outName + "&Type="+outType
+            },function (data) {
+                if(data.statusCode == 1){
+                    Messenger().post({
+                        message: "save output data failed",
+                        type: "error",
+                        hideAfter: 5,
+                        showCloseButton: true
+                    });
+                }else{
+                    alert("success");
+                }
+            }
+        )
+    }
+}
 
 /**
  * DESC : send program input data
  * DATE : 2019/11/27 14:20
  * AUTHOR : UDEAN
  */
-function acquireInput(){
-    var keys = InputMap.keySet();
-    if(keys.length != 0) {
-        var source = "";
-        var target = "";
-        var input = "";
-        for (var i = 0; i < keys.length; i++) {
-            var data = [];
-            source += keys[i].substr(0, 18) + ",";
-            target += keys[i].substr(18, 18) + ",";
-            data = InputMap.get(keys[i]);
-            var dto ="";
-            for(var j = 0 ; j < data.length-1; j++){
-                dto += data[j]+"|";
-            }
-            if(data.length != 0){
-                dto += data[data.length-1];
-            }
-            input += dto +",";
+function acquireInput(cid , checked){
+    if(checked.length == 0){
+        alert("if you don't want any output from this program.\nplease delete this link line");
+    }else{
+        var source = cid.substr(0,18);
+        var target = cid.substr(18,18);
+        var data = [];
+        for (var i = 0; i < checked.length; i++) {
+            data += checked[i]+",";
         }
-        source = source.substr(0,source.length-1);
-        target = target.substr(0 , target.length-1);
-        input = input.substr(0,input.length-1);
+        data = data.substr(0,data.length-1);
         common.ajax(  {
                 "url" : "/connect/input",
                 "type" : "post",
-                "data" : "source="+source+" &target="+target + "&input="+input
+                "data" : "source="+source+"&target="+target + "&input="+data
             },function (data) {
-                if(data.statusCode == 1){
-                    Messenger().post({
-                        message: "saving input data",
-                        type: "success",
-                        hideAfter: 5,
-                        showCloseButton: true
-                    });
+                if(data.statusCode == 0){
+                    alert("success");
+                    // Messenger().post({
+                    //     message: "saving input data",
+                    //     type: "success",
+                    //     hideAfter: 5,
+                    //     showCloseButton: true
+                    // });
                 }else{
                     Messenger().post({
                         message: "save input data failed",
@@ -142,6 +249,18 @@ function acquireInput(){
 var InputMap = new Map();
 var OutputMap = new Map();
 var InputCount = new Map();
+
+/**
+ * DESC : data construction, synchronized with back-font data
+ * DATE : 2019/12/23 10:59
+ * AUTHOR : UDEAN
+ */
+function ParamData(id,type, name) {
+    this.id = id;
+    this.type = type;
+    this.name = name;
+}
+
 
 //Output data construction
 function InputData (){
@@ -208,37 +327,64 @@ function  initConnectPopover(id) {
     });
 }
 
-
-
 //send connector message while saving file
-function acquireConnectors() {
-    var array = getConnectors() ; var len = 0 ;   while(len < array.length){
-        var s = array[len];
-        common.ajax(
-            {
-                "url": "/connect/add",
-                "type": "get",
-                "data": "sourceId="+s.getSourceId()+"&targetId="+ s.getTargetId()
-            },function (data){
-                if(data.statusCode == 1){
-                    Messenger().post({
-                        message: "saving connector",
-                        type: "success",
-                        hideAfter: 5,
-                        showCloseButton: true
-                    });
-                }else{
-                    Messenger().post({
-                        message: "save connector failed",
-                        type: "error",
-                        hideAfter: 5,
-                        showCloseButton: true
-                    });
+function acquireConnectors(callback) {
+    var array = getConnectors() ;
+    common.ajax({
+        "url":"/connect/amount",
+        "type":"get",
+        "data":"length="+array.length
+    },function (data) {
+            if(data.statusCode == 1){
+                Messenger().post({
+                    message: "synchronize error, may product incomplete code",
+                    type:"error",
+                    hideAfter:5,
+                    showCloseButton: true
+                })
+            }else{
+                var len = 0 ;
+                while(len < array.length){
+                    var s = array[len];
+                    common.ajax(
+                        {
+                            "url": "/connect/add",
+                            "type": "get",
+                            "data": "sourceId="+s.getSourceId()+"&targetId="+ s.getTargetId()
+                        },function (data){
+                            if(data.statusCode == 0){
+                                Messenger().post({
+                                    message: "saving connector",
+                                    type: "success",
+                                    hideAfter: 5,
+                                    showCloseButton: true
+                                });
+                            }else{
+                                Messenger().post({
+                                    message: "save connector failed",
+                                    type: "error",
+                                    hideAfter: 5,
+                                    showCloseButton: true
+                                });
+                            }
+                        });
+                    len ++;
                 }
-            });
-        len ++;
-    }
+                callback(success,fail);
+            }
+        }
+    )
 }
+
+/**
+ * DESC : change label accroding to input data
+ * DATE : 2019/12/12 15:49
+ * AUTHOR : UDEAN
+ */
+function setLabel(id,label) {
+    instanceMap.get(id).setLabel(label);
+}
+
 /**
  * DESC : check is flow runnable
  * DATE : 2019/11/11 9:49
@@ -251,7 +397,7 @@ function flowIsLegal(success, fail) {
             "type" : "get"
         },
         function (data) {
-            if(data.statusCode == 1 ){
+            if(data.statusCode == 0){
                 Messenger().post({
                     message: "flow legal",
                     type: "success",
@@ -272,6 +418,7 @@ function flowIsLegal(success, fail) {
     )
 
 }
+
 /**
  * DESC : callback function for legal check
  * DATE : 2019/12/3 9:11
@@ -282,10 +429,8 @@ function fail() {
 }
 
 function success() {
-    acquireInput();
     var form = $("<form>");
     form.attr("style", "display:none");
-    form.attr("target", "");
     form.attr("method", "post");
     form.attr("action", baseUrl + "/tool/down");
     var  mapArray = elementMap.keySet();
@@ -322,7 +467,6 @@ function success() {
     form.remove();
 }
 
-
 /**
  * DESC : delete out time connector cache
  * DATE : 2019/11/12 9:40
@@ -338,7 +482,7 @@ function delCache() {
                 "type":"get",
                 "data": "sourceId="+s.getSourceId()+"&targetId="+ s.getTargetId()
             }, function (data) {
-                if(data.statusCode == 1){
+                if(data.statusCode == 0){
                     Messenger().post({
                         message: "delete success",
                         type: "success",
@@ -357,6 +501,7 @@ function delCache() {
         )
     }
 }
+
 /**
  * DESC : delete all connector cache without data transform
  * DATE : 2019/11/12 9:49
@@ -367,7 +512,7 @@ function delAll() {
             "url":"/connect/delAll",
             "type":"get"
         },function (data) {
-            if(data.statusCode == 0){
+            if(data.statusCode == 1){
                 Messenger().post({
                     message: "delete cache failed",
                     type: "error",
@@ -375,23 +520,22 @@ function delAll() {
                     showCloseButton: true
                 })
             }else{
-                acquireConnectors();
-                flowIsLegal(success,fail);
+                if(data.statusCode == 2){
+                    Messenger().post({
+                        message: "force delete",
+                        type: "success",
+                        hideAfter: 5,
+                        showCloseButton: true
+                    })
+                }
+                //send connectors data several time
+                // acquireConnectors(flowIsLegal);
+                //send connectors data one time
+                sendAllConnectors(flowIsLegal);
+
             }
         }
     )
-}
-
-
-//reload text component position
-var element;
-function reloadText() {
-    var eles = elementMap.keySet();
-    for(var index = 0 ; index < eles.length ; index ++){
-        var key = eles[index];
-        element = elementMap.get(key);
-        alert(element);
-    }
 }
 
 /**
@@ -411,7 +555,6 @@ function reloadPosition(Id , xy) {
  * AUTHOR : UDEAN
  * PARM : element Id
  */
-
 function acquireXY(Id) {
     var element = elementMap.get(Id);
     alert(element.getLeft() + " " + element.getTop());
@@ -432,44 +575,55 @@ function  transXY(element) {
  * DATE : 2019/11/8 18:37
  * AUTHOR : UDEAN
  */
-
 function XY(x , y) {
     return {x:x,y:y};
 }
 
-function sendAllConnecotors(){
-    var array = getConnectors() ;
-    var len = 0 ;
-    var slist = [];
-    var tlist = [];
-    while(len < array.length){
-        slist.push(array[len].getSourceId());
-        tlist.push(array[len].getTargetId());
-        len++;
-    }
-    alert(slist);
-    common.ajax(
-        {
-            "url": "/connect/addArray",
-            "type": "POST",
-            "data": "sourceId=" +JSON.stringify(slist)+"&targetId=" + JSON.stringify(tlist)
-        },function (data){
-            if(data.statusCode == 1){
-                Messenger().post({
-                    message: "saving connector",
-                    type: "success",
-                    hideAfter: 5,
-                    showCloseButton: true
-                });
-            }else{
-                Messenger().post({
-                    message: "save connector failed",
-                    type: "error",
-                    hideAfter: 5,
-                    showCloseButton: true
-                });
+function sendAllConnectors(callback) {
+    var array = getConnectors();
+    if (array.length > 0) {
+        common.ajax({
+            "url": "/connect/amount",
+            "type": "get",
+            "data": "length=" + array.length
+        }, function (data) {
+            if (data.statusCode == 0) {
+                var len = 0;
+                var sList = "";
+                var tList = "";
+                while (len < array.length) {
+                    sList += array[len].getSourceId() + ",";
+                    tList += array[len].getTargetId() + ",";
+                    len++;
+                }
+                sList = sList.substr(0,sList.length-1);
+                tList = tList.substr(0,tList.length-1);
+                common.ajax(
+                    {
+                        "url": "/connect/addArray",
+                        "type": "POST",
+                        "data": "sourceId=" + sList + "&targetId=" + tList
+                    }, function (data) {
+                        if (data.statusCode == 0) {
+                            Messenger().post({
+                                message: "saved connector",
+                                type: "success",
+                                hideAfter: 5,
+                                showCloseButton: true
+                            });
+                            callback(success, fail);
+                        } else {
+                            Messenger().post({
+                                message: "save connector failed",
+                                type: "error",
+                                hideAfter: 5,
+                                showCloseButton: true
+                            });
+                        }
+                    });
             }
-        });
+        })
+    }
 }
 
 

@@ -69,10 +69,9 @@ public class LevelDbUtil {
             logger.error(e.getMessage());
         }     	
     }
-    
+
     public static void init() throws IOException {
     	errorRecovery(Constants.DATA_PATH + File.separator + "CURRENT");
-    	
         File dir = new File(Constants.DATA_PATH);
         Options options = new Options().createIfMissing(true);
         options.maxOpenFiles(100);
@@ -127,6 +126,7 @@ public class LevelDbUtil {
             byte[] bytes = db.get(key.getBytes(Constants.CHARSET));
             if(bytes != null) {
             	//JSON.parseObject("", new TypeReference<T>(classes){});
+                bytes = "".getBytes();
                 return JSON.parseObject(bytes, classes);
             }
         }

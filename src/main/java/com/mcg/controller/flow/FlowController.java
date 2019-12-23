@@ -172,7 +172,7 @@ public class FlowController extends BaseController {
         }
 
         message.setBody(notifyBody);
-        MessagePlugin.push(session.getId(), message);        
+//        MessagePlugin.push(session.getId(), message); // TODO: 2019/12/23 15:01 dependent process needing remove socket connect relative code
 		return mcgResult;
 	}  
 	
@@ -277,45 +277,45 @@ public class FlowController extends BaseController {
 //	}
 //
 
-	@RequestMapping(value="saveData", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public McgResult saveData(@Valid @RequestBody FlowData flowData, BindingResult result, HttpSession session) {
-        Message message = MessagePlugin.getMessage();
-        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);
-        NotifyBody notifyBody = new NotifyBody();
-	    McgResult mcgResult = new McgResult();
-
-	    if(Tools.validator(result, mcgResult, notifyBody)) {
-            flowData.setName(flowData.getDataProperty().getName());
-            CachePlugin.putFlowEntity(flowData.getFlowId(), flowData.getId(), flowData);
-            notifyBody.setContent("Data控件保存成功！");
-            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());
-        }
-
-        message.setBody(notifyBody);
-        MessagePlugin.push(session.getId(), message);
-		return mcgResult;
-	}
-
-    @RequestMapping(value="saveFlowEnd", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public McgResult saveFlowEnd(@Valid @RequestBody FlowEnd flowEnd, BindingResult result, HttpSession session) {
-        Message message = MessagePlugin.getMessage();
-        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);     
-        NotifyBody notifyBody = new NotifyBody();       
-        McgResult mcgResult = new McgResult();
-        
-        if(Tools.validator(result, mcgResult, notifyBody)) {
-            flowEnd.setName("流程结束");
-            CachePlugin.putFlowEntity(flowEnd.getFlowId(), flowEnd.getEndId(), flowEnd);
-            notifyBody.setContent("结束控件保存成功！");
-            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());            
-        }
-
-        message.setBody(notifyBody);
-        MessagePlugin.push(session.getId(), message);        
-        return mcgResult;
-    }	
+//	@RequestMapping(value="saveData", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+//	@ResponseBody
+//	public McgResult saveData(@Valid @RequestBody FlowData flowData, BindingResult result, HttpSession session) {
+//        Message message = MessagePlugin.getMessage();
+//        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);
+//        NotifyBody notifyBody = new NotifyBody();
+//	    McgResult mcgResult = new McgResult();
+//
+//	    if(Tools.validator(result, mcgResult, notifyBody)) {
+//            flowData.setName(flowData.getDataProperty().getName());
+//            CachePlugin.putFlowEntity(flowData.getFlowId(), flowData.getId(), flowData);
+//            notifyBody.setContent("Data控件保存成功！");
+//            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());
+//        }
+//
+//        message.setBody(notifyBody);
+//        MessagePlugin.push(session.getId(), message);
+//		return mcgResult;
+//	}
+//
+//    @RequestMapping(value="saveFlowEnd", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+//    @ResponseBody
+//    public McgResult saveFlowEnd(@Valid @RequestBody FlowEnd flowEnd, BindingResult result, HttpSession session) {
+//        Message message = MessagePlugin.getMessage();
+//        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);
+//        NotifyBody notifyBody = new NotifyBody();
+//        McgResult mcgResult = new McgResult();
+//
+//        if(Tools.validator(result, mcgResult, notifyBody)) {
+//            flowEnd.setName("流程结束");
+//            CachePlugin.putFlowEntity(flowEnd.getFlowId(), flowEnd.getEndId(), flowEnd);
+//            notifyBody.setContent("结束控件保存成功！");
+//            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());
+//        }
+//
+//        message.setBody(notifyBody);
+//        MessagePlugin.push(session.getId(), message);
+//        return mcgResult;
+//    }
 //
 //    @RequestMapping(value="testConnect", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
 //    @ResponseBody
@@ -332,87 +332,87 @@ public class FlowController extends BaseController {
 //        return mcgResult;
 //    }
     
-    @RequestMapping(value="saveDataSource", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public McgResult saveDataSource(@Valid @RequestBody List<McgDataSource> flowDataSources, BindingResult result, HttpSession session) throws IOException, ClassNotFoundException {
-        Message message = MessagePlugin.getMessage();
-        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);     
-        NotifyBody notifyBody = new NotifyBody();       
-        McgResult mcgResult = new McgResult();
-        
-        if(Tools.validator(result, mcgResult, notifyBody)) {
-            McgGlobal mcgGlobal = (McgGlobal)dbService.query(Constants.GLOBAL_KEY, McgGlobal.class);
-            mcgGlobal.setFlowDataSources(flowDataSources);
-            globalService.updateGlobal(mcgGlobal);   
-            notifyBody.setContent("数据源控件保存成功！");
-            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());            
-        }
-
-        message.setBody(notifyBody);
-        MessagePlugin.push(session.getId(), message);        
-        return mcgResult;
-    }    
-	
-    @RequestMapping(value="saveWebStruct", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public McgResult saveWebStruct(@Valid @RequestBody WebStruct webStruct, BindingResult result, HttpSession session) throws IOException {
-        Message message = MessagePlugin.getMessage();
-        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);     
-        NotifyBody notifyBody = new NotifyBody();       
-        McgResult mcgResult = new McgResult();
-        
-        if(Tools.validator(result, mcgResult, notifyBody)) {
-            flowService.saveFlow(webStruct, session);
-            notifyBody.setContent("流程保存成功！");
-            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());            
-        }
-
-        message.setBody(notifyBody);
-        MessagePlugin.push(session.getId(), message);          
-        return mcgResult;
-    }
-
-    @RequestMapping(value="stop", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public McgResult stop(String flowId, HttpSession session) {
-    	McgResult mcgResult = new McgResult();
-    	try {
-    		
-    		String flowInstanceId = Tools.genFlowInstanceId(session.getId(), flowId);
-	    	ExecuteStruct executeStruct = FlowInstancesUtils.executeStructMap.get(flowInstanceId);
-	    	if(executeStruct != null && executeStruct.getRunStatus() != null) {
-	    		executeStruct.getRunStatus().setInterrupt(true);
-	    	}
-	    	stopFlow(executeStruct.getChildExecuteStruct());
-	    	
-	    	Thread.sleep(2000L);
-	    	
-	    	if(executeStruct.getFlowTaskFutureList().size() > 0 ) {
-		    	for(int i=executeStruct.getFlowTaskFutureList().size() -1 ; i>=0; i--) {
-		    		Future<RunStatus> flowFuture = executeStruct.getFlowTaskFutureList().get(i);
-		    		if(!flowFuture.isDone() ) {
-		    			flowFuture.cancel(true);
-		    		}
-		    	}
-	    	}
-
-    	} catch (Exception e) {
-    		mcgResult.setStatusCode(0);
-		}
-    	return mcgResult;
-    }
-    
-    private boolean stopFlow(ExecuteStruct executeStruct) {
-    	if(executeStruct != null && executeStruct.getRunStatus() != null) {
-    		executeStruct.getRunStatus().setInterrupt(true);
-    		logger.debug("正在中断子流程：{}", executeStruct.getTopology().getName());    
-    	} else {
-    		logger.debug("中断所有子流程完毕！");    		
-    		return false;
-    	}
-    	return stopFlow(executeStruct.getChildExecuteStruct());
-    }
-    
+//    @RequestMapping(value="saveDataSource", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+//    @ResponseBody
+//    public McgResult saveDataSource(@Valid @RequestBody List<McgDataSource> flowDataSources, BindingResult result, HttpSession session) throws IOException, ClassNotFoundException {
+//        Message message = MessagePlugin.getMessage();
+//        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);
+//        NotifyBody notifyBody = new NotifyBody();
+//        McgResult mcgResult = new McgResult();
+//
+//        if(Tools.validator(result, mcgResult, notifyBody)) {
+//            McgGlobal mcgGlobal = (McgGlobal)dbService.query(Constants.GLOBAL_KEY, McgGlobal.class);
+//            mcgGlobal.setFlowDataSources(flowDataSources);
+//            globalService.updateGlobal(mcgGlobal);
+//            notifyBody.setContent("数据源控件保存成功！");
+//            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());
+//        }
+//
+//        message.setBody(notifyBody);
+//        MessagePlugin.push(session.getId(), message);
+//        return mcgResult;
+//    }
+//
+//    @RequestMapping(value="saveWebStruct", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+//    @ResponseBody
+//    public McgResult saveWebStruct(@Valid @RequestBody WebStruct webStruct, BindingResult result, HttpSession session) throws IOException {
+//        Message message = MessagePlugin.getMessage();
+//        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);
+//        NotifyBody notifyBody = new NotifyBody();
+//        McgResult mcgResult = new McgResult();
+//
+//        if(Tools.validator(result, mcgResult, notifyBody)) {
+//            flowService.saveFlow(webStruct, session);
+//            notifyBody.setContent("流程保存成功！");
+//            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());
+//        }
+//
+//        message.setBody(notifyBody);
+//        MessagePlugin.push(session.getId(), message);
+//        return mcgResult;
+//    }
+//
+//    @RequestMapping(value="stop", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+//    @ResponseBody
+//    public McgResult stop(String flowId, HttpSession session) {
+//    	McgResult mcgResult = new McgResult();
+//    	try {
+//
+//    		String flowInstanceId = Tools.genFlowInstanceId(session.getId(), flowId);
+//	    	ExecuteStruct executeStruct = FlowInstancesUtils.executeStructMap.get(flowInstanceId);
+//	    	if(executeStruct != null && executeStruct.getRunStatus() != null) {
+//	    		executeStruct.getRunStatus().setInterrupt(true);
+//	    	}
+//	    	stopFlow(executeStruct.getChildExecuteStruct());
+//
+//	    	Thread.sleep(2000L);
+//
+//	    	if(executeStruct.getFlowTaskFutureList().size() > 0 ) {
+//		    	for(int i=executeStruct.getFlowTaskFutureList().size() -1 ; i>=0; i--) {
+//		    		Future<RunStatus> flowFuture = executeStruct.getFlowTaskFutureList().get(i);
+//		    		if(!flowFuture.isDone() ) {
+//		    			flowFuture.cancel(true);
+//		    		}
+//		    	}
+//	    	}
+//
+//    	} catch (Exception e) {
+//    		mcgResult.setStatusCode(0);
+//		}
+//    	return mcgResult;
+//    }
+//
+//    private boolean stopFlow(ExecuteStruct executeStruct) {
+//    	if(executeStruct != null && executeStruct.getRunStatus() != null) {
+//    		executeStruct.getRunStatus().setInterrupt(true);
+//    		logger.debug("正在中断子流程：{}", executeStruct.getTopology().getName());
+//    	} else {
+//    		logger.debug("中断所有子流程完毕！");
+//    		return false;
+//    	}
+//    	return stopFlow(executeStruct.getChildExecuteStruct());
+//    }
+//
     @RequestMapping(value="generate", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public McgResult generate(@Valid @RequestBody WebStruct webStruct, BindingResult result, HttpSession session) throws ClassNotFoundException, IOException, InterruptedException, ExecutionException {

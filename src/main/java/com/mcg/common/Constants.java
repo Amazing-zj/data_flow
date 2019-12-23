@@ -28,6 +28,10 @@ import java.nio.charset.Charset;
  */
 public class Constants {
 
+	public static final String DEPEN = "depenCache";
+	public static final String INPUT = "inputCache";
+	public static final String OUTPUT = "outputCache";
+
     /*   字符编码        */
     public static final Charset CHARSET = Charset.forName("utf-8");
     /*   ID前缀     */
@@ -39,11 +43,12 @@ public class Constants {
     /*   全局变量key   */
     public static final String GLOBAL_KEY = "mcgGlobal";
     /*   流程文件扩展名        */
-    public static final String EXTENSION = ".mcg";
+    public static final String EXTENSION = ".dfc";
+    public static final String EXTENSION2 = ".c";
     /*   字符加密key   */
     public final static String DES_KEY = "mcg-helper_2017_mc"; 
     /*   数据持久化路径        */
-	public static String DATA_PATH;
+	public static String DATA_PATH ;
     /*   项目的绝对路径        */
     public static String WEB_PATH;
 	/*   缓存名称        */

@@ -23,12 +23,35 @@
 
 	<cache name="varCache" timeToIdleSeconds="1200" timeToLiveSeconds="600" maxEntriesLocalHeap="600" eternal="true" overflowToDisk="true"/>
 	<cache name="conCache"
-		    eternal="false"
+		    eternal="true"
 			maxElementsInMemory="100"
 			overflowToDisk="true"
 			diskPersistent="false"
 			timeToIdleSeconds="0"
 			timeToLiveSeconds="300"
 			memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="inputCache"
+		   eternal="true"
+		   maxElementsInMemory="100"
+		   overflowToDisk="true"
+		   diskPersistent="false"
+		   />
+
+
+	<cache name="outputCache"
+		   eternal="true"
+		   maxElementsInMemory="100"
+		   overflowToDisk="true"
+		   diskPersistent="false"
+		    />
+
+	<cache name="depenCache"
+		   eternal="true"
+		   maxElementsInMemory="100"
+		   overflowToDisk="false"
+		   diskPersistent="false"
+		   memoryStoreEvictionPolicy="LRU" />
+
 
 </ehcache>  

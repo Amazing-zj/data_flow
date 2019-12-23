@@ -9,9 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script language="javascript">
+    // var delCount = [];
+    // var increase = [];
     $(document).ready(function () {
             var id = $("#id").attr("name").substr(0,18);
             var cons = OutputMap.get(id);
+            var exist = [];
             if(cons == undefined){
                 InputCount.remove(id);
             }else {
@@ -24,6 +27,7 @@
                     var divNode = "<div id = '" + id + "_" + i + "'><input type = 'text' id = '" + type + "' value ='" + tList[i-1] + "'><input type ='text' id = '" + name + "'value = '" + nList[i-1] + "'/><button onclick='del(" + i + ")'>X</button><div>";
                     $("#addItemGroup").append(divNode);
                     count.push(i);
+                    exist.push()
                 }
                 InputCount.put(id, count);
             }
@@ -49,7 +53,6 @@
                 $("#addItemGroup").append(divNode);
             });
             $("#deleteItem").bind("click", function () {
-                count = [];
                 $("#addItemGroup").children().each(function () {
                     $(this).remove();
                 });
@@ -60,12 +63,13 @@
                 var nList = [];
                 var count = InputCount.get(id);
                 if(count == undefined){
-                    alert("not output data");
+                    alert("output data lacking");
+                    deleteInput(id);
                     return ;
                 }
-                for(var i = 1 ; i <= count.length ; i++){
-                    nList.push($("#"+id+"_Name_"+i).val());
-                    tList.push($("#"+id+"_Type_"+i).val());
+                for(var i = 0 ; i < count.length ; i++){
+                    nList.push($("#"+id+"_Name_"+count[i]).val());
+                    tList.push($("#"+id+"_Type_"+count[i]).val());
                 }
                 cons = new InputData();
                 var result = cons.add(nList,tList);
@@ -74,14 +78,15 @@
                 }else if (result == 2){
                     alert("name repeated");
                 }else if( result == 0){
+                    acquireOutput(id, cons);
                     OutputMap.put(id,cons);
-                    alert("successful!!!");
+                    initInputMap(id,cons);
                 }else{
                     alert("error");
                 }
 
             })
-        }
+    }
     );
 
     function del(e){
@@ -92,6 +97,7 @@
             alert("don't call del function by using console !!!");
             return;
         }
+        // delCount.push(new ParamData(id,$("#" +id+ "_Name_" +e ).val(),$("#" + id + "_Type_" +e).val()));
         $("#"+id+"_"+e).remove();
         count.splice(index,1);
         InputCount.put(id,count);

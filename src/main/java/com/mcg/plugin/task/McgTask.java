@@ -64,7 +64,7 @@ public class McgTask {
 	
     public static synchronized void init() {
     	try {
-			WontonData wontonData = (WontonData)LevelDbUtil.getObject(Constants.WONTON_KEY, WontonData.class);
+			WontonData wontonData = LevelDbUtil.getObject(Constants.WONTON_KEY, WontonData.class);
 			if(wontonData != null) {
 				wontonInstanceMap = wontonData.getWontonHeartMap();
 			}

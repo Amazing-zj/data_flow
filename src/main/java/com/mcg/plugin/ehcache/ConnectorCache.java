@@ -19,6 +19,11 @@ public class ConnectorCache {
         cache.removeAll();
     }
 
+    public static boolean hasKey(Integer key){
+        Element e = cacheManager.getCache(Constants.CONNECTOR_CACHE).get(key);
+        return e==null ? false : true;
+    }
+
     public static boolean isNull(){
         Cache cache = cacheManager.getCache(Constants.CONNECTOR_CACHE);
         if(cache.getSize()>0) {

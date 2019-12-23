@@ -287,6 +287,7 @@ function suspend(operate) {
 		createHtmlModal(baseMap.get("selector"), null);
 	} else if(operate == "delete") {
 		removePopover();
+		deleteOutput(baseMap.get("selector"));
 		removeElement(baseMap.get("selector"));
 	} else if(operate == "logOut") {
 		removePopover();
@@ -647,49 +648,6 @@ function initFunc() {
 	});
 	$('#flowExpBtn').click(function(){
 		delAll();
-		//below code turn to callback function
-		//export data here
-		// acquireConnectors();
-		// flowIsLegal(success,fail);
-		// acquireInput();
-		// var form = $("<form>");
-		// form.attr("style", "display:none");
-		// form.attr("target", "");
-		// form.attr("method", "post");
-		// form.attr("action", baseUrl + "/tool/down");
-		// var  mapArray = elementMap.keySet();
-		// if(mapArray.length > 0) {
-		// 	var index = 0 ;
-		// 	while(index < mapArray.length) {
-		// 		var value = elementMap.get(mapArray[index++]);
-		// 		var flowIdInput = $("<input>");
-		// 		flowIdInput.attr("type", "hidden");
-		// 		flowIdInput.attr("name", "flowId_" + index);
-		// 		flowIdInput.attr("value", value.getId());
-		// 		form.append(flowIdInput);
-		// 	}
-		// }
-		// var flowIdInput = $("<input>");
-		// flowIdInput.attr("type","hidden");
-		// flowIdInput.attr("name","length");
-		// flowIdInput.attr("value",mapArray.length);
-		// form.append(flowIdInput);
-		//
-		// var flowIdInput = $("<input>");
-		// flowIdInput.attr("type","hidden");
-		// flowIdInput.attr("name","flowId");
-		// flowIdInput.attr("value",$("#flowSelect").attr("flowId"));
-		// form.append(flowIdInput);
-		// var flowNameInput = $("<input>");
-		// flowNameInput.attr("type","hidden");
-		// flowNameInput.attr("name","flowName");
-		// flowNameInput.attr("value",$("#flowSelect").attr("flowName"));
-		// form.append(flowNameInput);
-		// $("body").append(form);
-		//
-		// form.submit();
-		// form.remove();
-
 	});
 	$('#flowClearBtn').click(function(){
         var parentdiv=$('<div></div>');
@@ -869,8 +827,7 @@ function eventInterceptor(id) {
 		}
 	});
 }
-// TODO: 2019/11/12 14:38  connector
-var tempConnectId ;
+
 function initConnectLine() {
     // setup some defaults for jsPlumb.
     var instance = jsPlumb.getInstance({
@@ -883,7 +840,7 @@ function initConnectLine() {
                   length: 14,
                   foldback: 0.8     //三角形的厚度  0.618： 普通箭头，1：平底箭头，2：钻石箭头
               } ],
-              [ "Label", { id: "label" }]
+              [ "Label", { id: "label" , label :"default value"}]
 //            [ "Label", { label: "请拖至需要选择连接的节点", id: "label", cssClass: "aLabel" }]
         ],
         Container: "flowarea"
@@ -908,12 +865,9 @@ function initConnectLine() {
 
     instance.bind("click",function (c) {
     	var connectorId = c.sourceId + c.targetId;
-		tempConnectId = connectorId;
 		instanceMap.put(connectorId,c);
     	removePopover();
     	$("#"+connectorId).popover('show');
-		// connectorId = sourceId + targetId
-		// TODO: 2019/11/12 15:24 add connector info modify here , needing info constructor and connector code reference
 	});
 
     //当连接线取消时

@@ -37,11 +37,17 @@
         }
         $("#save").bind("click",function () {
             checked = [];
+            var connectorLabel = "";
             $("input[name = 'input']:checked").each(function () {
                 checked.push($(this).val());
+                connectorLabel += $(this).val()+",";
             });
-            InputMap.put(cid,checked);
-            alert("success!!!");
+            if(connectorLabel != ""){
+                connectorLabel = connectorLabel.substr(0,connectorLabel.length-1);
+            }
+            setLabel($("#id").attr("name"),connectorLabel);
+            InputMap.put(cid, checked);
+            acquireInput(cid, checked);
         })
         }
     );
