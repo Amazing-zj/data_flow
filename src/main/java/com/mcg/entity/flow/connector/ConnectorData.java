@@ -37,6 +37,7 @@ public class ConnectorData implements Comparable, Serializable {
         }
     }
 
+    public ConnectorData(){}
 
     public ConnectorData(String sourceId , String targetId){
         setSourceId(sourceId);

@@ -60,6 +60,11 @@ public class ParamData implements Comparable, Serializable {
         return value;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return compareTo(obj) == 0;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

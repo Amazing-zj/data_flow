@@ -48,6 +48,8 @@
             setLabel($("#id").attr("name"),connectorLabel);
             InputMap.put(cid, checked);
             acquireInput(cid, checked);
+            addConnectorLabel($("#id").attr("name"), checked);
+            $(this).dialog( "destroy" );
         })
         }
     );

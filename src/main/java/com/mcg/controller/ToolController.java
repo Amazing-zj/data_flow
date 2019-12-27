@@ -247,7 +247,7 @@ public class ToolController extends BaseController {
 					bw.newLine();
 				}
 			}
-			ConnectController.cachePersistent(bw);
+//			ConnectController.cachePersistent(bw);
 			bw.flush();
 
 			bw.close();

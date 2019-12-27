@@ -172,6 +172,7 @@ function flowDropBind() {
 				initPopover();
 		 		//初始化流程节点拖拽功能和连接线连接功能
 				initConnectLine();
+				setConnectorLabel();
 			} else { //在流程区中移动节点时，重新记录坐标
 				var xy = getXY(ui.draggable.attr("id"),ui.draggable.attr("clone"));
 				var element = elementMap.get(ui.draggable.attr("id"));
@@ -840,7 +841,7 @@ function initConnectLine() {
                   length: 14,
                   foldback: 0.8     //三角形的厚度  0.618： 普通箭头，1：平底箭头，2：钻石箭头
               } ],
-              [ "Label", { id: "label" , label :"default value"}]
+              [ "Label", { id: "label"}]
 //            [ "Label", { label: "请拖至需要选择连接的节点", id: "label", cssClass: "aLabel" }]
         ],
         Container: "flowarea"
@@ -920,7 +921,9 @@ function initConnectLine() {
 			}
 			slist.push(s);
 			targetMap.put(tid,slist);
+			addConnector(info.sourceId, info.targetId)
         }
+
     });
 
     instance.batch(function () {

@@ -9,6 +9,10 @@ import net.sf.ehcache.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jws.Oneway;
+import java.util.LinkedList;
+import java.util.List;
+
 public class ConnectorCache {
 
     private static Logger logger = LoggerFactory.getLogger(ConnectorCache.class);
@@ -17,6 +21,24 @@ public class ConnectorCache {
     public static void removeAll(){
         Cache cache = cacheManager.getCache(Constants.CONNECTOR_CACHE);
         cache.removeAll();
+    }
+
+    public static List getTargetListBySource(String source){
+        Cache cache = cacheManager.getCache(Constants.CONNECTOR_CACHE);
+        List keyList = cache.getKeys();
+        List<ConnectorData> target = new LinkedList();
+        if(keyList != null && keyList.size() != 0){
+            for(Object o:keyList){
+                Element e = cache.get(o);
+                if(e != null){
+                    ConnectorData data = (ConnectorData) e.getObjectValue();
+                    if(data.getSourceId().substring(0,18).equals(source)){
+                        target.add(data);
+                    }
+                }
+            }
+        }
+        return target;
     }
 
     public static boolean hasKey(Integer key){

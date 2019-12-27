@@ -1,15 +1,52 @@
-
 /---------------test-------------------/
-var tempList =[];
-function testOutputMap(sourceId){
-    var target = targetMap.get(sourceId);
-    if(target != undefined) {
-        tempList = [];
-        for(var i = 0 ; i < target.length ; i++){
-            tempList.push(sourceId+target[i]);
+var labelMap = new Map();
+/**
+ * DESC : repaint connector label when add new node
+ * DATE : 2019/12/25 16:33
+ * AUTHOR : UDEAN
+ */
+function setConnectorLabel() {
+    var keySet = labelMap.keySet();
+    if(keySet != undefined && keySet.length != 0){
+        for(var i = 0 ; i< keySet.length ; i++){
+            instanceMap.get(keySet[i]).setLabel(labelMap.get(keySet[i]));
         }
-    }else{
-        return null;
+    }
+}
+
+/**
+ * DESC : add label data
+ * DATE : 2019/12/25 16:39
+ * AUTHOR : UDEAN
+ */
+function addConnectorLabel(id, label) {
+    labelMap.put(id, transArray2Str(label));
+}
+
+/**
+ * DESC : transform input data array to label string
+ * DATE : 2019/12/25 17:18
+ * AUTHOR : UDEAN
+ */
+function transArray2Str(label) {
+    if(label == undefined || label == NaN || label.length == 0)
+        return "";
+    var str = "";
+    for(var i = 0 ; i < label.length ; i++){
+        str += label[i]+ ",";
+    }
+    str = str.substr(0,str.length-1);
+    return str;
+}
+
+/**
+ * DESC : delete label data when connector delete
+ * DATE : 2019/12/25 16:40
+ * AUTHOR : UDEAN
+ */
+function delConnectorLabel(id) {
+    if(labelMap.get(id) != undefined){
+        labelMap.remove(id);
     }
 }
 
@@ -76,6 +113,7 @@ function suspendConnector(operate) {
         removePopover();
         removeElement(id) //remove binding popover
         removeConnector(id.substr(0,36),id); // remove connector cache data
+        delConnectorLabel(id);
     }
 }
 
@@ -114,6 +152,34 @@ function createConnectorHtmlModal(id, param) {
 }
 
 /**
+ * DESC : update data when connector created
+ * DATE : 2019/12/25 10:41
+ * AUTHOR : UDEAN
+ */
+function addConnector(source, target) {
+    var data = {};
+    data['sourceId'] = source;
+    data['targetId'] = target;
+    common.ajax({
+            url:"/connect/addConnector",
+            type: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json"
+        },function (data) {
+        if(data.statusCode != 0){
+            Messenger().post({
+                message: data.statusMessage,
+                type: "error",
+                hideAfter: 5,
+                showCloseButton: true
+            })
+        }
+        }
+    )
+}
+
+
+/**
  * DESC : delete input map data when remove connector
  * DATE : 2019/12/5 14:09
  * AUTHOR : UDEAN
@@ -121,15 +187,29 @@ function createConnectorHtmlModal(id, param) {
 function deleteInput(id) {
     var cid = id.substr(0,18) + id.substr(36,18);
     InputMap.remove(cid);
+    var data = {};
+    data['sourceId'] = id.substr(0,36);
+    data['targetId'] = id.substr(36);
     common.ajax({
-        "url":"/connect/delInput",
-        "type":"get",
-        "data":"source="+id.substr(0,18)+"&target="+id.substr(36,18)
-    })
+        url:"/connect/delConnector",
+        type:"POST",
+        data:JSON.stringify(data),
+        contentType : "application/json"
+    },function (data) {
+        if(data.statusCode != 0){
+            Messenger().post({
+                message: data.statusMessage,
+                type: "error",
+                hideAfter: 5,
+                showCloseButton: true
+            });
+        }
+        }
+    )
 }
 
 /**
- * DESC :
+ * DESC : delete data when node has been deleted
  * DATE : 2019/12/11 15:55
  * AUTHOR : UDEAN
  */
@@ -148,14 +228,16 @@ function deleteOutput(id) {
  * DATE : 2019/12/5 11:28
  * AUTHOR : UDEAN
  */
-function  initInputMap(id, cons) {
+function initInputMap(id, cons) {
     var tList = targetMap.get(id);
     if(tList == undefined){
         return;
     }
     for(var i = 0 ; i < tList.length; i++){
         var cid = id + tList[i];
-        InputMap.put(cid, cons);
+        if(InputMap.get(cid) == undefined ) {
+            InputMap.put(cid, cons);
+        }
     }
 }
 
@@ -182,7 +264,7 @@ function acquireOutput(cid, cons){
             outType += tList[i]+",";
         }
         outName = outName.substr(0,outName.length-1);
-        outType = outType.substr(0,outType.length-1)
+        outType = outType.substr(0,outType.length-1);
         common.ajax(  {
                 "url" : "/connect/output",
                 "type" : "post",
@@ -210,7 +292,8 @@ function acquireOutput(cid, cons){
  */
 function acquireInput(cid , checked){
     if(checked.length == 0){
-        alert("if you don't want any output from this program.\nplease delete this link line");
+        alert("if you don't want any output from this program\nplease delete this link line");
+        alert("if there are no any date dependency from this node\nplease remove it");
     }else{
         var source = cid.substr(0,18);
         var target = cid.substr(18,18);
@@ -509,8 +592,10 @@ function delCache() {
  */
 function delAll() {
     common.ajax({
-            "url":"/connect/delAll",
-            "type":"get"
+            // "url":"/connect/delAll",
+        "url":"/connect/test",
+            "type":"get",
+        "data" : "callback=0"
         },function (data) {
             if(data.statusCode == 1){
                 Messenger().post({
@@ -583,9 +668,10 @@ function sendAllConnectors(callback) {
     var array = getConnectors();
     if (array.length > 0) {
         common.ajax({
-            "url": "/connect/amount",
+            "url": "/connect/test",
             "type": "get",
-            "data": "length=" + array.length
+            // "data": "length=" + array.length
+            "data" : "callback=0"
         }, function (data) {
             if (data.statusCode == 0) {
                 var len = 0;
@@ -600,9 +686,10 @@ function sendAllConnectors(callback) {
                 tList = tList.substr(0,tList.length-1);
                 common.ajax(
                     {
-                        "url": "/connect/addArray",
+                        "url": "/connect/test",
                         "type": "POST",
-                        "data": "sourceId=" + sList + "&targetId=" + tList
+                        // "data": "sourceId=" + sList + "&targetId=" + tList
+                        "data" : "callback=0"
                     }, function (data) {
                         if (data.statusCode == 0) {
                             Messenger().post({

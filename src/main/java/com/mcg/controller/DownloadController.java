@@ -89,7 +89,36 @@ public class DownloadController {
 //
 //		return null;
 //	}
-	
+
+    @RequestMapping("/testOutput")
+    public void test(String id){
+	    Set<ParamData> list = (Set) OutputCache.get(id);
+	    if(list == null) {
+            logger.debug("null set");
+        }else{
+	        for(ParamData paramData : list){
+	            logger.info(paramData.toString());
+            }
+        }
+    }
+
+    @RequestMapping("/testInput")
+    public void testInput(String id){
+	    String source = id.substring(0,36);
+	    String target = id.substring(36);
+	    Map<String, Set> map = (Map)InputCache.get(target);
+	    if(map == null){
+	        logger.debug("null map");
+        }else{
+	        if(map.get(source) == null){
+	            logger.debug("null map value");
+            }else{
+	            logger.error("values");
+            }
+        }
+    }
+
+
     @RequestMapping("downloadFlow")
     public String downloadFlow(String fileName, HttpServletRequest request, HttpServletResponse response) {
 

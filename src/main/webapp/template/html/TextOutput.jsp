@@ -9,12 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script language="javascript">
-    // var delCount = [];
-    // var increase = [];
     $(document).ready(function () {
             var id = $("#id").attr("name").substr(0,18);
             var cons = OutputMap.get(id);
-            var exist = [];
             if(cons == undefined){
                 InputCount.remove(id);
             }else {
@@ -27,7 +24,6 @@
                     var divNode = "<div id = '" + id + "_" + i + "'><input type = 'text' id = '" + type + "' value ='" + tList[i-1] + "'><input type ='text' id = '" + name + "'value = '" + nList[i-1] + "'/><button onclick='del(" + i + ")'>X</button><div>";
                     $("#addItemGroup").append(divNode);
                     count.push(i);
-                    exist.push()
                 }
                 InputCount.put(id, count);
             }
@@ -81,23 +77,25 @@
                     acquireOutput(id, cons);
                     OutputMap.put(id,cons);
                     initInputMap(id,cons);
+                    $(this).dialog( "destroy" );
                 }else{
                     alert("error");
                 }
 
             })
-    }
-    );
+        $("#cancel").bind("click", function () {
+            $(this).dialog( "destroy" );
+        })
+    });
 
     function del(e){
         var id = $("#id").attr("name").substr(0,18);
         var count = InputCount.get(id);
         var index = count.indexOf(e);
         if(index == -1){
-            alert("don't call del function by using console !!!");
+            alert("don't call this function by using console !!!\n\115\117\124\110\105\122 \106\125\103\113\105\122");
             return;
         }
-        // delCount.push(new ParamData(id,$("#" +id+ "_Name_" +e ).val(),$("#" + id + "_Type_" +e).val()));
         $("#"+id+"_"+e).remove();
         count.splice(index,1);
         InputCount.put(id,count);

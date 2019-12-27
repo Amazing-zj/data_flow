@@ -14,7 +14,6 @@ import com.mcg.plugin.ehcache.InputCache;
 import com.mcg.plugin.ehcache.OutputCache;
 import com.mcg.plugin.websocket.MessagePlugin;
 import org.apache.commons.collections.list.TreeList;
-import org.hibernate.result.Output;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.io.BufferedWriter;
+import java.io.Serializable;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -37,15 +36,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @RequestMapping("/connect")
 public class ConnectController {
 
-    private static AtomicBoolean canUse;
-    private static CountDownLatch latch = null;
-    private static List<ConnectorData> list;
-    private static Map<String, Integer> indexMap;
-    private static Map<Integer, String> reindexMap;
-    private static int index;
-    private static Logger logger = LoggerFactory.getLogger(ConnectController.class);
+    private  AtomicBoolean canUse;
+    private  CountDownLatch latch = null;
+    private  List<ConnectorData> list;
+    private  Map<String, Integer> indexMap;
+    private  Map<Integer, String> reindexMap;
+    private  int index;
+    private  Logger logger = LoggerFactory.getLogger(ConnectController.class);
 
-    static {
+     {
         index = 0;
         indexMap = new HashMap<>();
         reindexMap = new HashMap<>();
@@ -53,14 +52,14 @@ public class ConnectController {
         canUse = new AtomicBoolean(true);
     }
 
-    public static void cachePersistent(BufferedWriter bw) throws Exception {
-        ConnectorData keySet[] = new ConnectorData[list.size()];
-        int i = 0;
-        for (ConnectorData temp : list) {
-            keySet[i++] = temp;
-        }
-        ToolController.cachePersistent(keySet, bw);
-    }
+//    public static void cachePersistent(BufferedWriter bw) throws Exception {
+//        ConnectorData keySet[] = new ConnectorData[list.size()];
+//        int i = 0;
+//        for (ConnectorData temp : list) {
+//            keySet[i++] = temp;
+//        }
+//        ToolController.cachePersistent(keySet, bw);
+//    }
 
     @RequestMapping(value = "/delAll", method = RequestMethod.GET)
     @ResponseBody
@@ -69,10 +68,12 @@ public class ConnectController {
         result.setStatusCode(0);
         for (int i = 0; i < index; i++) {
             if (!ConnectorCache.remove(i)) {
-                if (ConnectorCache.hasKey(i)) {
+                if (ConnectorCache.hasKey(i) && list.get(i) != null) {
                     logger.error("error occur " + list.get(i).toString());
                 } else {
-                    logger.debug("element deleted " + list.get(i).toString());
+                    if(list.get(i) != null) {
+                        logger.debug("element deleted " + list.get(i).toString());
+                    }
                 }
                 result.setStatusCode(1);
                 if (removeAll()) {
@@ -92,7 +93,9 @@ public class ConnectController {
             }
             i = 0;
             while (i < mapArray.length) {
-                list.remove(mapArray[i++]);
+                if(list.get(i) != null) {
+                    list.remove(mapArray[i++]);
+                }
             }
         } catch (Exception e) {
             if (e instanceof IndexOutOfBoundsException && list.size() == 0 && indexMap.size() == 0) {
@@ -132,6 +135,20 @@ public class ConnectController {
         return result;
     }
 
+    @RequestMapping("/test")
+    @ResponseBody
+    public McgResult test(String callback){
+        int i;
+        try{
+            i = Integer.valueOf(callback);
+        }catch (NumberFormatException e){
+            i = 0;
+        }
+        McgResult result  = new McgResult();
+        result.setStatusCode(i);
+        return  result;
+    }
+
     //no use, maybe use it next week, I remember I had tested it a long time age and it work perfectly
     //anyway, there still some details needing adding or modifying
     @RequestMapping(value = "/addArray", method = RequestMethod.POST)
@@ -146,10 +163,9 @@ public class ConnectController {
         result.setStatusCode(0);
         for (int i = 0; i < len; i++) {
             logger.debug("source: " + sourceId[i] + " target: " + targetId[i]);
-            if( add( new ConnectorData( sourceId[i], targetId[i]))){
+            if(indexOf(list, new ConnectorData(sourceId[i],targetId[i])) != -1){
                 latch.countDown();
                 logger.info("count down once, left: "+latch.getCount());
-               continue;
             }else{
                 result.setStatusCode(1);
                 break;
@@ -160,7 +176,7 @@ public class ConnectController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     @ResponseBody
-    public McgResult add(String sourceId, String targetId, HttpSession session) {
+    public McgResult add(String sourceId, String targetId) {
         McgResult result = new McgResult();
         Message message = MessagePlugin.getMessage();
         NotifyBody body = new NotifyBody();
@@ -174,7 +190,6 @@ public class ConnectController {
             result.setStatusCode(1);
         }
         message.setBody(body);
-        result.addAttribute(session.getId(), message);
         return result;
     }
 
@@ -183,7 +198,7 @@ public class ConnectController {
         new Thread(new RemoveCacheThread()).start();
     }
 
-    private static class RemoveCacheThread implements Runnable {
+    private  class RemoveCacheThread implements Runnable {
         @Override
         public void run() {
             int count = 5000;
@@ -226,7 +241,7 @@ public class ConnectController {
         result.setStatusCode(0);
         if (latch != null) {
             try {
-                if(!latch.await(10, TimeUnit.SECONDS)){
+                if (!latch.await(10, TimeUnit.SECONDS)) {
                     result.setStatusCode(3);
                     return result;
                 }
@@ -238,7 +253,6 @@ public class ConnectController {
             }
         } else {
             result.setStatusCode(2);
-            return result;
         }
         if (DependencyCache.size() != 0) {
             DependencyCache.removeAll();
@@ -247,6 +261,7 @@ public class ConnectController {
             logger.error("illegal dependency loop");
             result.setStatusCode(1);
         } else {
+            result.setStatusCode(0);
             if (list.size() == 1) {
 //                logger.info("+----------------------------------------------+");
 //                logger.info("|----------------single dependency-------------|");
@@ -271,6 +286,9 @@ public class ConnectController {
         indexMap = new HashMap<>();
         reindexMap = new HashMap<>();
         for (ConnectorData temp : this.list) {
+            if(temp == null){
+                continue;
+            }
             if (indexMap.containsKey(temp.getSourceId())) {
                 s = indexMap.get(temp.getSourceId());
             } else {
@@ -342,7 +360,7 @@ public class ConnectController {
     @RequestMapping(value = "/input", method = RequestMethod.POST)
     @ResponseBody
     public McgResult getInputData(String source, String target, String[] input) {
-        McgResult result = new McgResult();
+        McgResult result = new McgResult(); // TODO: 2019/12/24 9:56 rewrite ajax call back message-----according to result message
         result.setStatusCode(0);
         InputCache.delMap(target, source);
         if (InputCache.isContains(target, source)) {
@@ -382,7 +400,7 @@ public class ConnectController {
                     list.addAll(s_list);
                     List<ParamData> deleteArray = new ArrayList<>(list.size() - data.length);
                     for (ParamData temp_data : list) {
-                        if (d_list.indexOf(temp_data) == -1) {
+                        if (indexOf(d_list, temp_data) == -1) {
                             deleteArray.add(temp_data);
                             if (deleteArray.size() + data.length == list.size()) {
                                 break;
@@ -407,34 +425,209 @@ public class ConnectController {
             result.setStatusCode(1);
         } else {
             result.setStatusCode(0);
+            delInput(source);
         }
         return result;
     }
 
+    /**
+     * DESC : invoke when create connector and init input data
+     * DATE : 2019/12/24 14:51
+     * AUTHOR : UDEAN
+     */
+    @RequestMapping(value = "/addConnector", method = RequestMethod.POST)
+    @ResponseBody
+    public McgResult addConnector(@RequestBody ConnectorData data){
+        McgResult result = new McgResult();
+        if(ConnectorCache.put(index++,data)){
+            list.add(data);
+            initInput(data.getSourceId(),data.getTargetId());
+            result.setStatusCode(0);
+        }else {
+            result.setStatusCode(1);
+            result.setStatusMes("");
+        }
+        return result;
+    }
+
+    /**
+     * DESC : invoke when connector deleted and delete input data
+     * DATE : 2019/12/24 14:51
+     * AUTHOR : UDEAN
+     */
+    @RequestMapping(value = "/delConnector", method = RequestMethod.POST)
+    @ResponseBody
+    public McgResult delConnector(@RequestBody ConnectorData data){
+        McgResult result = new McgResult();
+        int index = indexOf(list, data);
+        if(index == -1) {
+            result.setStatusCode(1);
+            result.setStatusMes("not such connector data");
+        }else {
+            ConnectorCache.remove(index);
+            list.remove(index);
+            result.setStatusCode(0);
+            delInput(data.getSourceId(), data.getTargetId());
+        }
+        return result;
+    }
+
+    /**
+     * DESC : turn delete-add way to delete-deleted and add-increased
+     * DATE : 2019/12/24 14:52
+     * AUTHOR : UDEAN
+     */
     @RequestMapping(value = "/output", method = RequestMethod.POST)
     @ResponseBody
     public McgResult getOutputData(String source, String[] Type, String[] Name) {
         McgResult result = new McgResult();
         result.setStatusCode(0);
-        OutputCache.del(source);
-        if (OutputCache.get(source) != null) {
-            result.setStatusCode(1);
-        } else {
-            String[] type = Type;
-            String[] name = Name;
-            if (type.length != name.length) {
-                result.setStatusCode(1);
-                logger.error("type length " + type.length + " is not equal to name length " + name.length);
-            } else {
-                Set<ParamData> list = new TreeSet();
-                for (int i = 0; i < name.length; i++) {
-                    list.add(new ParamData(source, type[i], name[i]));
-                }
-                logger.info("save output cache with key " + source);
-                OutputCache.put(source, list);
-            }
+        Set<ParamData>set =(TreeSet) OutputCache.get(source);
+        if(set == null || set.size() == 0){
+            firstTimeEdit(source, Type, Name, result);
+        }else{
+            updateOutput(source, Type, Name, set, result);
         }
         return result;
+    }
+
+    /**
+     * DESC : delete input cache data
+     * DATE : 2019/12/26 14:18
+     * AUTHOR : UDEAN
+     */
+    private void updateInput(ConnectorData data, List<ParamData> deleteList){
+        Map<String,Set>map =(Map) InputCache.get(data.getTargetId().substring(0,18));
+        Set<ParamData> set = null;
+        if(map != null){
+            set = map.get(data.getSourceId().substring(0,18));
+            if(set != null && set.size() != 0){
+                for(ParamData paramData : deleteList){
+                    logger.debug(String.valueOf(set.remove(paramData)));
+                }
+            }
+        }
+        InputCache.putMap(data.getTargetId().substring(0,18), data.getSourceId().substring(0,18), set);
+    }
+
+    private void initInput(String source, String target){
+        Set<ParamData> sourceSet =(TreeSet) OutputCache.get(source.substring(0,18));
+        InputCache.putMap(target.substring(0, 18), source.substring(0, 18), sourceSet);
+    }
+
+    private void delInput(String source, String target){
+        InputCache.delMap(target.substring(0, 18), source.substring(0, 18));
+    }
+
+    private void delInput(String source){
+        List<ConnectorData> targetList = ConnectorCache.getTargetListBySource(source);
+        if(targetList != null && targetList.size() != 0){
+            for(ConnectorData temp : targetList){
+                delInput(source,temp.getTargetId());
+            }
+        }
+    }
+
+    /**
+     * DESC : call when first time (or output was null) edit
+     * DATE : 2019/12/26 10:03
+     * AUTHOR : UDEAN
+     */
+    private void firstTimeEdit(String source, String []type, String []name, McgResult result){
+        List<ConnectorData> target = ConnectorCache.getTargetListBySource(source);
+        if(type.length != name.length || type.length == 0){
+            result.setStatusCode(1);
+            result.setStatusMes("");
+            logger.error("length error");
+        }else{
+            Set<ParamData> set = new TreeSet<>();
+            for(int i = 0 ; i < type.length ; i++){
+                set.add(new ParamData(source, type[i], name[i]));
+            }
+            OutputCache.put(source, set);
+            if(target != null && target.size() != 0) {
+                for (ConnectorData data : target){
+                    Set<ParamData> temp_set = new TreeSet<>();
+                    temp_set.addAll(set);
+                    InputCache.putMap(data.getTargetId().substring(0,18), source, temp_set);
+                }
+            }
+            result.setStatusCode(0);
+        }
+    }
+
+    /**
+     * DESC : call when update output
+     * DATE : 2019/12/26 14:04
+     * AUTHOR : UDEAN
+     */
+    private void updateOutput(String source, String []type, String []name, Set<ParamData>set, McgResult result){
+        List<ConnectorData> target = ConnectorCache.getTargetListBySource(source);
+        List<ParamData>delete = new LinkedList<>();
+        if (type.length != name.length) {
+            result.setStatusCode(1);
+            logger.error("type length " + type.length + " is not equal to name length " + name.length);
+        } else {
+            Set<ParamData> list = new TreeSet();
+            List<ParamData> t_list =new LinkedList<>(); // set not support remove object by index
+            t_list.addAll(set);
+            ParamData temp = null;
+            for (int i = 0; i < name.length; i++) {
+                temp = new ParamData(source, type[i], name[i]);
+                if ( set.contains(temp)) {
+                    int index = indexOf(t_list, temp);
+                    if(index == -1){
+                        result.setStatusCode(1);
+                        logger.error("can't find this object in list");
+                        break;
+                    }
+                    list.add(t_list.remove(index));
+                    delete.add(temp);
+                } else {
+                    list.add(new ParamData(source, type[i], name[i]));
+                }
+            }
+            OutputCache.put(source, list);
+            if(temp != null) {
+                logger.info("save output cache with key " + source);
+                set.removeAll(delete);
+                if (set.size() != 0 && target != null && target.size() != 0) {
+                    for (ConnectorData data : target) {
+                        updateInput(data, delete);
+                    }
+                }
+            }else{
+                logger.debug("can't find: "+ temp == null ? "null" : temp.toString());
+                saveErrorToFile();
+            }
+        }
+        result.setStatusCode(0);
+    }
+
+    private int indexOf(List<ConnectorData>list, ConnectorData target){
+        int len = list.size();
+        if(len != 0) {
+            for (int index = 0; index < len; index++) {
+                if ( list.get(index) != null && target.compareTo(list.get(index)) == 0)
+                    return index;
+            }
+        }
+        return -1;
+    }
+
+    private int indexOf(List<ParamData>list, ParamData target){
+        int len = list.size();
+        if(len != 0) {
+            for (int index = 0; index < len; index++) {
+                if ( list.get(index) != null && target.compareTo(list.get(index)) == 0)
+                    return index;
+            }
+        }
+        return -1;
+    }
+
+    private void saveErrorToFile(){
+
     }
 
     /**
@@ -446,8 +639,8 @@ public class ConnectController {
     @RequestMapping(value= "/updateOutput", method = RequestMethod.POST)
     @ResponseBody
     public McgResult updateOutput(@RequestBody OutputUpdate data, String source){// TODO: 2019/12/23 14:11 js call function not finish
-        McgResult result = new McgResult();
-        List<String>target = data.getTargetList();
+        McgResult result = new McgResult();         // TODO: 2019/12/24 9:46 to use this function must change the way to construct output form
+        List<String> target = data.getTargetList();  // TODO: 2019/12/24 16:50 delete
         List<ParamData> delete = data.getDeleteList();
         List<ParamData> increase = data.getIncreaseList();
         if(delete.size() != 0 ){
