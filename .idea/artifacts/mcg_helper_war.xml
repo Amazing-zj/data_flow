@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mcg-helper:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>mcg-helper</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="mcg.war">
+      <element id="artifact" artifact-name="mcg-helper:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="annotations-api">
+    <CLASSES>
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/annotations-api.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/ecj-4.4.2.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat-dbcp.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat-embed-core.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat-embed-el.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat-embed-jasper.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat-embed-logging-juli.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat-embed-logging-log4j.jar!/" />
+      <root url="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat7-embed-websocket.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

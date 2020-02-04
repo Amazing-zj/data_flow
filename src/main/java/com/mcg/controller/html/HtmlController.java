@@ -134,6 +134,22 @@ public class HtmlController extends BaseController {
 		mv.setViewName("html/flowTextModal");
 		return mv;
 	}
+
+	/* 流程节点 Node_Modal */
+	@RequestMapping(value="/flowNodeModal")
+	public ModelAndView getFlowNodeModal() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = this.getPageData();
+		mv.addObject("modalId", pd.get("modalId"));
+		mv.addObject("outModes", FlowTextOutModeEnum.values());
+		if(pd.get("type") == null){
+			mv.addObject("type" , "void");
+		} else{
+			mv.addObject("type",pd.get("type"));
+		}
+		mv.setViewName("html/flowNodeModal");
+		return mv;
+	}
 	
 	/* 流程节点 Java_Modal */
 	@RequestMapping(value="/flowJavaModal")

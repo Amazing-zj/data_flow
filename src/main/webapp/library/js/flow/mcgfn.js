@@ -172,7 +172,7 @@ function flowDropBind() {
 				initPopover();
 		 		//初始化流程节点拖拽功能和连接线连接功能
 				initConnectLine();
-				setConnectorLabel();
+				resetLabel();
 			} else { //在流程区中移动节点时，重新记录坐标
 				var xy = getXY(ui.draggable.attr("id"),ui.draggable.attr("clone"));
 				var element = elementMap.get(ui.draggable.attr("id"));
@@ -829,6 +829,7 @@ function eventInterceptor(id) {
 	});
 }
 
+
 function initConnectLine() {
     // setup some defaults for jsPlumb.
     var instance = jsPlumb.getInstance({
@@ -866,7 +867,7 @@ function initConnectLine() {
 
     instance.bind("click",function (c) {
     	var connectorId = c.sourceId + c.targetId;
-		instanceMap.put(connectorId,c);
+		// instanceMap.put(connectorId,c);
     	removePopover();
     	$("#"+connectorId).popover('show');
 	});
@@ -902,7 +903,6 @@ function initConnectLine() {
         	var top = s.getTop() + t.getTop();
 			var divNode = $("<div data-toggle='popover' id=" + connector.getConnectorId()+ " name='' eletype='connector' class='w eletype'></div>");
 			divNode.css("visibility","hidden");
-			// divNode.css("display","none");
 			divNode.css("left", left/2 +"px");
 			divNode.css("top", top/2 +"px");
 			$("#flowarea").append(divNode);
@@ -922,6 +922,7 @@ function initConnectLine() {
 			slist.push(s);
 			targetMap.put(tid,slist);
 			addConnector(info.sourceId, info.targetId)
+			instanceMap.put(info.sourceId + info.targetId, info);
         }
 
     });
@@ -933,7 +934,7 @@ function initConnectLine() {
             connector: [ "StateMachine", { curviness: 20 } ],//轻微弯曲的线 连接线离节点有间隙
    //       connector: [ "Bezier", { curviness: 50 } ], // 连接线离节点无间隙
             connectorStyle: { strokeStyle: "#5c96bc", lineWidth: 2, outlineColor: "transparent", outlineWidth: 4 },
-            maxConnections: 5,
+            maxConnections: 10,
             onMaxConnections: function (info, e) {
     			Messenger().post({
     				message: "达到连接数上限" + info.maxConnections + "！",

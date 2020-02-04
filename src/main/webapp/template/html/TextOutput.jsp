@@ -49,6 +49,7 @@
                 $("#addItemGroup").append(divNode);
             });
             $("#deleteItem").bind("click", function () {
+                count = [];
                 $("#addItemGroup").children().each(function () {
                     $(this).remove();
                 });
@@ -60,7 +61,6 @@
                 var count = InputCount.get(id);
                 if(count == undefined){
                     alert("output data lacking");
-                    deleteInput(id);
                     return ;
                 }
                 for(var i = 0 ; i < count.length ; i++){
@@ -70,21 +70,23 @@
                 cons = new InputData();
                 var result = cons.add(nList,tList);
                 if(result == 1){
-                    alert("can exist blank input");
+                    alert("exist blank input");
                 }else if (result == 2){
                     alert("name repeated");
                 }else if( result == 0){
                     acquireOutput(id, cons);
                     OutputMap.put(id,cons);
-                    initInputMap(id,cons);
-                    $(this).dialog( "destroy" );
+                    // initInputMap(id,cons);
+                    // $(this).dialog( "destroy" );
+                    $("[role='dialog']").remove()
                 }else{
                     alert("error");
                 }
 
             })
         $("#cancel").bind("click", function () {
-            $(this).dialog( "destroy" );
+            // $(this).dialog( "destroy" );
+            $("[role='dialog']").remove()
         })
     });
 
@@ -129,6 +131,13 @@
                                 <div class="col-sm-4">
                                     <div class="fg-line">
                                         <input type="text" id="${modalId }_key"  class="form-control"  />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "form-group">
+                                <div class = "col-sm-4">
+                                    <div class="fg-line">
+                                        <input type="text" id = "${modalId}_type" value = "${type}">
                                     </div>
                                 </div>
                             </div>

@@ -46,10 +46,11 @@
                 connectorLabel = connectorLabel.substr(0,connectorLabel.length-1);
             }
             setLabel($("#id").attr("name"),connectorLabel);
+            setConnectorLabel();
             InputMap.put(cid, checked);
             acquireInput(cid, checked);
-            addConnectorLabel($("#id").attr("name"), checked);
-            $(this).dialog( "destroy" );
+            addConnectorLabel($("#id").attr("name"), connectorLabel);
+            // $(this).dialog( "destroy" );
         })
         }
     );

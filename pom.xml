@@ -128,11 +128,11 @@
 		    <version>5.2.4.Final</version>
 		</dependency>
 <!--		add full hibernate dependency for embeded tomcat-->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-envers</artifactId>
-			<version>5.2.4.Final</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.hibernate</groupId>-->
+<!--			<artifactId>hibernate-envers</artifactId>-->
+<!--			<version>5.2.4.Final</version>-->
+<!--		</dependency>-->
 
 <!--		<dependency>-->
 <!--			<groupId>org.hibernate</groupId>-->
@@ -140,24 +140,32 @@
 <!--			<version>5.2.4.Final</version>-->
 <!--		</dependency>-->
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-c3p0</artifactId>
-			<version>5.2.4.Final</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.hibernate</groupId>-->
+<!--			<artifactId>hibernate-c3p0</artifactId>-->
+<!--			<version>5.2.4.Final</version>-->
+<!--		</dependency>-->
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-proxool</artifactId>
-			<version>5.2.4.Final</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.hibernate</groupId>-->
+<!--			<artifactId>hibernate-proxool</artifactId>-->
+<!--			<version>5.2.4.Final</version>-->
+<!--		</dependency>-->
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-infinispan</artifactId>
-			<version>5.2.4.Final</version>
-		</dependency>
-<!--	over-->
+<!--		<dependency>-->
+<!--			<groupId>org.hibernate</groupId>-->
+<!--			<artifactId>hibernate-infinispan</artifactId>-->
+<!--			<version>5.2.4.Final</version>-->
+<!--		</dependency>-->
+
+
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.jgit</groupId>-->
+<!--			<artifactId>org.eclipse.jgit</artifactId>-->
+<!--			<version>5.6.0.201912101111-r</version>-->
+<!--		</dependency>-->
+
+		<!--	over-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>

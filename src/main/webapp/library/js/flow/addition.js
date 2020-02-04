@@ -9,7 +9,7 @@ function setConnectorLabel() {
     var keySet = labelMap.keySet();
     if(keySet != undefined && keySet.length != 0){
         for(var i = 0 ; i< keySet.length ; i++){
-            instanceMap.get(keySet[i]).setLabel(labelMap.get(keySet[i]));
+            instanceMap.get(keySet[i]).connection.setLabel(labelMap.get(keySet[i]));
         }
     }
 }
@@ -20,7 +20,21 @@ function setConnectorLabel() {
  * AUTHOR : UDEAN
  */
 function addConnectorLabel(id, label) {
-    labelMap.put(id, transArray2Str(label));
+    labelMap.put(id, label);
+}
+
+/**
+ * DESC : reset label value after repaint nddes and connectors
+ * DATE : 2020/1/1 13:26
+ * AUTHOR : UDEAN
+ */
+function resetLabel() {
+    // real time: invoke setConnectorLabel function
+    // test time: use instanceMap keySet and set self defined values
+    // var keys = instanceMap.keySet();
+    // for (var i = 0; i < keys.length ; i++){
+    //     instanceMap.get(keys[i]).connection.setLabel("test");
+    // }
 }
 
 /**
@@ -45,9 +59,9 @@ function transArray2Str(label) {
  * AUTHOR : UDEAN
  */
 function delConnectorLabel(id) {
-    if(labelMap.get(id) != undefined){
-        labelMap.remove(id);
-    }
+    // if(labelMap.get(id) != undefined){
+    //     labelMap.remove(id);
+    // }
 }
 
 /**
@@ -111,7 +125,7 @@ function suspendConnector(operate) {
         baseMap.get("instance").detach(instanceMap.get(id)); //remove connector
         deleteInput(id); //remove input map data and backup data
         removePopover();
-        removeElement(id) //remove binding popover
+        removeElement(id);//remove binding popover
         removeConnector(id.substr(0,36),id); // remove connector cache data
         delConnectorLabel(id);
     }
@@ -258,7 +272,7 @@ function acquireOutput(cid, cons){
         var tList = cons.getType();
         var source = cid;
         var outName = "";
-        var outType = ""
+        var outType = "";
         for (var i = 0; i < tList.length; i++) {
             outName += nList[i]+",";
             outType += tList[i]+",";
@@ -465,7 +479,7 @@ function acquireConnectors(callback) {
  * AUTHOR : UDEAN
  */
 function setLabel(id,label) {
-    instanceMap.get(id).setLabel(label);
+    instanceMap.get(id).connection.setLabel(label);
 }
 
 /**
