@@ -22,10 +22,12 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mcg.entity.flow.Node.NodeText;
 import com.mcg.entity.flow.connector.ParamData;
 import com.mcg.entity.flow.text.FlowText;
 import com.mcg.plugin.ehcache.DependencyCache;
 import com.mcg.plugin.ehcache.InputCache;
+import com.mcg.plugin.ehcache.NodeCache;
 import com.mcg.plugin.ehcache.OutputCache;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -251,6 +253,17 @@ public class DownloadController {
             }
         }
 
+    }
+
+    private void addNode(OutputStream os) throws Exception{
+        List<String>list = NodeCache.getKeys();
+        if(list != null && list.size() != 0){
+            for(String key : list){
+                NodeText text = (NodeText)NodeCache.get(key);
+                os.write(text.getTextCore().getSource().getBytes());
+            }
+            // TODO: 2020/2/11 13:18 delete NodeCache cache data
+        }
     }
 
     private boolean isNameLegal(String name){

@@ -146,8 +146,8 @@ function flowDropBind() {
 			//排除流程区中，非流程控件的html对象拖拽事件
 			if(ui.draggable.attr("eletype") == undefined || ui.draggable.attr("eletype") == "undefined" ) {
 				return ;
-			} else if( ui.draggable.attr("eletype") != "text"){
-				if(ui.draggable.attr("eletype" ) != "info") {
+			} else if( ui.draggable.attr("eletype") != "text" ){
+				if(ui.draggable.attr("eletype" ) != "node") {
 					alert(CANNOTUSE);
 					return;
 				}
@@ -181,7 +181,7 @@ function flowDropBind() {
 				saveXY(ui.draggable.attr("id"), xy);
 				elementMap.put(ui.draggable.attr("id"), element);
 
-				let tlist = sourceMap.get(element.getId().substr(0,18));
+				let tlist = sourceMap.get(element.getId());
 				if(tlist != undefined) {
                     for (let i = 0; i < tlist.length; i++) {
                         let left = element.getLeft() + tlist[i].getLeft();
@@ -192,7 +192,7 @@ function flowDropBind() {
                 }
 
 
-				let slist = targetMap.get(element.getId().substr(0,18));
+				let slist = targetMap.get(element.getId());
 				if(slist != undefined) {
                     for (let i = 0; i < slist.length; i++) {
                         let left = element.getLeft() + slist[i].getLeft();
@@ -284,13 +284,16 @@ function initPopover() {
  * @param operate (edit:修改  delete:删除  logOut:日志定位)
  */
 function suspend(operate) {
+	var id = baseMap.get("selector");
 	if(operate == "edit") {
-		createHtmlModal(baseMap.get("selector"), null);
+		createHtmlModal(id, null);
 	} else if(operate == "delete") {
 		removePopover();
-		deleteOutput(baseMap.get("selector"));
-		removeElement(baseMap.get("selector"));
+		deleteOutput(id);
+		removeElement(id);
+		removeRelativeConnector(id);
 	} else if(operate == "logOut") {
+		//not use
 		removePopover();
 		alert(CANNOTUSE);
 		return ;
@@ -907,8 +910,8 @@ function initConnectLine() {
 			divNode.css("top", top/2 +"px");
 			$("#flowarea").append(divNode);
 			initConnectPopover(connector.getConnectorId());
-			var sid = s.getId().substr(0,18);
-			var tid = t.getId().substr(0,18);
+			var sid = s.getId();
+			var tid = t.getId();
 			var tlist = sourceMap.get(sid);
 			if(tlist == undefined) {
 				tlist = []

@@ -1,17 +1,63 @@
 /---------------test-------------------/
 var labelMap = new Map();
+
+/**
+ * DESC : delete relative targetMap data
+ * DATE : 2020/2/6 14:08
+ * AUTHOR : UDEAN
+ */
+function delTarget(id){
+    targetMap.remove();
+}
+
+/**
+ * DESC : delete reative connector and label when remove node
+ * DATE : 2019/2/5 19:33
+ * AUTHOR : UDEAN
+ */
+var tid;
+ function removeRelativeConnector(id){
+    var list = targetMap.get(id);
+    tid = id;
+    if(list != undefined && list.length !=0) {
+        targetMap.remove(id);
+        for (var i = 0; i < list.length; i++) {
+            // baseMap.get("instance").detach(instanceMap.get(id + list[i]));
+            // delConnectorLabel(id + list[i]);
+            instanceMap.remove(list[i].getId() + id);
+        }
+    }
+    list = sourceMap.get(id);
+    if(list != undefined && list.length !=0) {
+        sourceMap.remove(id);
+        for (var i = 0; i < list.length; i++) {
+            // baseMap.get("instance").detach(instanceMap.get(id + list[i])); // remove connector line, done in function repaint
+            // delConnectorLabel(id + list[i]); // remove label data, when add a new node it done in function resetLabel
+            instanceMap.remove(id + list[i].getId() );
+        }
+    }
+ }
+
 /**
  * DESC : repaint connector label when add new node
  * DATE : 2019/12/25 16:33
  * AUTHOR : UDEAN
  */
 function setConnectorLabel() {
-    var keySet = labelMap.keySet();
+    var keySet = instanceMap.keySet();
+    var tempMap = new Map();
     if(keySet != undefined && keySet.length != 0){
+        var value, key;
         for(var i = 0 ; i< keySet.length ; i++){
-            instanceMap.get(keySet[i]).connection.setLabel(labelMap.get(keySet[i]));
+            key = keySet[i];
+            value = instanceMap.get(key);
+            if(value != undefined && labelMap.get(key) != undefined ) {
+                value.connection.setLabel(labelMap.get(key));
+                tempMap.put(key, labelMap.get(key));
+            }
         }
     }
+    labelMap = tempMap;
 }
 
 /**
@@ -29,6 +75,7 @@ function addConnectorLabel(id, label) {
  * AUTHOR : UDEAN
  */
 function resetLabel() {
+    setConnectorLabel();
     // real time: invoke setConnectorLabel function
     // test time: use instanceMap keySet and set self defined values
     // var keys = instanceMap.keySet();
@@ -59,9 +106,9 @@ function transArray2Str(label) {
  * AUTHOR : UDEAN
  */
 function delConnectorLabel(id) {
-    // if(labelMap.get(id) != undefined){
-    //     labelMap.remove(id);
-    // }
+    if(labelMap.get(id) != undefined){
+        labelMap.remove(id);
+    }
 }
 
 /**
@@ -113,6 +160,67 @@ function showPopover(id){
     $("#"+id).popover("show");
 }
 
+/**
+ * DESC : for node tool bar click function
+ * DATE : 2020/2/11 12:31
+ * AUTHOR : UDEAN
+ */
+function suspendNode(operate) {
+    var id = baseMap.get("selector");
+    if(operate == "edit"){
+        createNodeHtmlModal(id,null);
+    }else if(operate == "delete"){
+        removePopover();
+        deleteNode(id);
+        removeElement(id);
+    }
+}
+
+/**
+ * DESC : delete node cache
+ * DATE : 2020/2/11 13:06
+ * AUTHOR : UDEAN
+ */
+function deleteNode(id){
+    common.ajax( {
+        "url"  : "/common/deleteNode",
+        "type" : "GET",
+        "data" : "id="+id
+    }
+    )
+}
+
+
+/**
+ * DESC : get backup  node message
+ * DATE : 2020/2/11 12:42
+ * AUTHOR : UDEAN
+ */
+function getNodeDataById(id, func) {
+    common.ajax({
+        url : "/common/getNodeById",
+        type : "POST",
+        data : "flowId=" + $("#flowSelect").attr("flowId") + "&id="+id
+    }, func);
+}
+
+/**
+ * DESC : init node info
+ * DATE : 2020/2/11 12:43
+ * AUTHOR : UDEAN
+ */
+function initNodeModal(id, editor) {
+    getNodeDataById(id, function(data) {
+        if(data != null && data != "" && data != undefined && data.textProperty != undefined) {
+            common.formUtils.setValues(id + "_textForm", data);
+        }
+        if(data != null && data != undefined && data.textCore != undefined) {
+            editor.setValue(data.textCore.source);
+        }
+    });
+}
+
+
 /-----------finished----------/
 
 function suspendConnector(operate) {
@@ -127,7 +235,7 @@ function suspendConnector(operate) {
         removePopover();
         removeElement(id);//remove binding popover
         removeConnector(id.substr(0,36),id); // remove connector cache data
-        delConnectorLabel(id);
+        delConnectorLabel(id);//remove connector label data
     }
 }
 
@@ -146,6 +254,21 @@ function createTextOutputModal(id, param) {
 
     param["modalId"] = id;
     param["eletype"] ="output";
+    param["option"] = option;
+    common.showAjaxDialog(url, setDialogBtns(param), createModalCallBack, null, param);
+}
+
+function createNodeHtmlModal(id, param){
+    removePopover();
+    if(param == null)
+        param = {};
+    var option = {};
+    var url = "/html/flowNodeModal";
+    option["title"] = "输入数据";
+    option["width"] = 1100;
+
+    param["modalId"] = id;
+    param["eletype"] ="node";
     param["option"] = option;
     common.showAjaxDialog(url, setDialogBtns(param), createModalCallBack, null, param);
 }

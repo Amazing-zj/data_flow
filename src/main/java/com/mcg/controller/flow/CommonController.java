@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mcg.entity.flow.Node.NodeText;
+import com.mcg.plugin.ehcache.NodeCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,7 +90,14 @@ public class CommonController extends BaseController {
         McgProduct mcgProduct = CachePlugin.getFlowEntity(pd.getString("flowId"), pd.getString("id"));
     	return mcgProduct;
     }
-    
+
+    @RequestMapping(value="getNodeDataById", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public NodeText getNodeDataById() {
+        PageData pd = this.getPageData();
+        return  (NodeText) NodeCache.get(pd.getString("id"));
+    }
+
     @RequestMapping(value="/getDatabaseTypes")
     @ResponseBody   
     public Map<String, String> getDatabaseType() throws Exception{
@@ -97,7 +106,12 @@ public class CommonController extends BaseController {
             map.put(dt.getName(), dt.getValue());
         }       
         return map;
-    }    
+    }
+
+    @RequestMapping(value = "/deleteNode" , method = RequestMethod.GET)
+    public void deleteNode(String id){
+        NodeCache.del(id);
+    }
     
     @RequestMapping(value="/getServerTypes")
     @ResponseBody   

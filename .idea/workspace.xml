@@ -10,112 +10,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d118068-ef5d-43f7-9233-d15507138552" name="Default Changelist" comment="git test">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/UDean.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__antlr_antlr_2_7_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_caucho_hessian_4_0_38.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_6_0_rc4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_6_0_rc4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_kevinsawicki_http_request_6_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_0_18.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_22_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jcraft_jsch_0_1_55.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_microsoft_sqlserver_sqljdbc4_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_dbcp_commons_dbcp_1_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_dbutils_commons_dbutils_1_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_pool_commons_pool_1_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_jsr250_api_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_el_el_api_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_el_javax_el_api_3_0_1_b04.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_enterprise_cdi_api_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_inject_javax_inject_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_websocket_javax_websocket_api_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jstl_jstl_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_34.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_2_10_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_core_2_6_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ezmorph_ezmorph_1_0_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jta_1_1_spec_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjrt_1_7_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_7_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_14.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_freemarker_freemarker_2_3_25_incubating.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_5_0_1_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_2_4_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_ehcache_5_2_4_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_entitymanager_5_2_4_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_5_3_1_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_1_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_javax_persistence_hibernate_jpa_2_1_api_1_0_0_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_iq80_leveldb_leveldb_0_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_iq80_leveldb_leveldb_api_0_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_0_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_0_Final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_interceptor_jboss_interceptors_api_1_1_spec_1_0_0_Beta1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_caches_mybatis_ehcache_1_0_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_generator_mybatis_generator_core_1_3_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_python_jython_standalone_2_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_26.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_26.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_1_5_0_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_3_4_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__postgresql_postgresql_9_1_901_1_jdbc4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/annotations_api.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jython_standalone_2_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/mcg-helper.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test/BrowserWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test/CompareCon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test/Seri.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeCore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeProperty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeText.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/template/html/flowNodeModal.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/NodeCache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/template/html/flowNodeSuspen.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mcg/common/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mcg/common/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mcg/controller/DownloadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mcg/controller/DownloadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mcg/controller/flow/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mcg/controller/flow/CommonController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mcg/controller/html/HtmlController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mcg/controller/html/HtmlController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/text/FlowText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/text/FlowText.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ehcache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ehcache.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/library/js/flow/addition.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/library/js/flow/addition.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/library/js/flow/htmlmodel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/library/js/flow/htmlmodel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/library/js/flow/initmodal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/library/js/flow/initmodal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/library/js/flow/mcgfn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/library/js/flow/mcgfn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/template/html/Connetor.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/template/html/Connetor.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/template/flow/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/template/flow/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/template/html/TextOutput.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/template/html/TextOutput.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/template/html/flowNodeModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/template/html/flowNodeModal.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/template/html/flowTextModal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/template/html/flowTextModal.jsp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -147,76 +59,33 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/Connetor.jsp">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/NodeCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeText.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/mcgfn.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="869" column="42" selection-start-line="869" selection-start-column="42" selection-end-line="869" selection-end-column="42" />
+            <state relative-caret-position="192">
+              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#0#6#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1080#1081#0" expanded="true" />
+                <element signature="e#1102#1103#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/index.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/DownloadController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state relative-caret-position="-93">
+              <caret line="186" column="60" lean-forward="true" selection-start-line="186" selection-start-column="60" selection-end-line="186" selection-end-column="60" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/common.js">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/html/HtmlController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="143" column="44" selection-start-line="143" selection-start-column="37" selection-end-line="143" selection-end-column="44" />
-              <folding>
-                <element signature="n#style#0;n#pre#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="e#101#108#1" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#0#6#0" expanded="true" />
-                <element signature="e#6#12#0" expanded="true" />
-                <element signature="e#12#18#0" expanded="true" />
-                <element signature="e#18#24#0" expanded="true" />
-                <element signature="e#24#30#0" expanded="true" />
-                <element signature="e#30#36#0" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="81">
+              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -224,17 +93,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowSuspension.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/addition.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-549">
-              <caret line="62" column="31" lean-forward="true" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+            <state relative-caret-position="228">
+              <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -253,36 +113,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>suspend</find>
-      <find>remove</find>
-      <find>removeAL</find>
-      <find>removeAll</find>
-      <find>initInputMap</find>
-      <find>destor</find>
-      <find>Input</find>
-      <find>init</find>
-      <find>draggable</find>
-      <find>createTe</find>
-      <find>ConnectorLabel</find>
-      <find>level</find>
-      <find>pl</find>
-      <find>please</find>
-      <find>acquireOutput</find>
-      <find>bou</find>
-      <find>jcraf</find>
-      <find>org.apache.log4j.Level</find>
-      <find>set</find>
-      <find>se</find>
-      <find>instance</find>
-      <find>instanceMap</find>
-      <find>repaint</find>
-      <find>Text</find>
-      <find>var</find>
       <find>put</find>
       <find>get</find>
       <find>i</find>
       <find>Map</find>
       <find>Map.get</find>
+      <find>core</find>
+      <find>Text</find>
+      <find>typ</find>
+      <find>type</find>
+      <find>text</find>
+      <find>flowText</find>
+      <find>flowTextMo</find>
+      <find>common/get</find>
+      <find>common/getMcgProductById</find>
+      <find>jsch</find>
+      <find>removeRelatib</find>
+      <find>getInstanc</find>
+      <find>repaint</find>
+      <find>target</find>
+      <find>targetMap</find>
+      <find>Connector</find>
+      <find>delConnector</find>
+      <find>sourceMap</find>
+      <find>getInstance</find>
+      <find>resetLa</find>
+      <find>info</find>
+      <find>initTe</find>
+      <find>node</find>
+      <find>O</find>
+      <find>OUTPUT</find>
     </findStrings>
     <replaceStrings>
       <replace>var</replace>
@@ -293,6 +153,8 @@
       <replace>+</replace>
       <replace />
       <replace>Node</replace>
+      <replace>NODE</replace>
+      <replace>node</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -327,20 +189,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/IndexController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/template/flow/index.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/SerTreeList.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Test/CompareCon.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/ehcache.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/OutputCache.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/DependencyCache.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/template/compiler/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/listener/McgHelperRunComplete.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/template/html/flowTextModal.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/text/TextProperty.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/plugin/task/McgTask.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/common/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/util/LevelDbUtil.java" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/spring/applicationContext.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/OutputUpdate.java" />
@@ -348,36 +202,44 @@
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/flow/FlowController.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test/BrowserWindow.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test/TomcatStart.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/text/FlowText.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/ConnectorData.java" />
         <option value="E:/mskj/private_bank/a.bat" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/Node.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/NodeTeam.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/ConnectorTeam.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/DownloadController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/InputCache.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/ToolController.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test/FileLog.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/ConnectorCache.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/ConnectController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/ParamData.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/library/js/flow/htmlmodel.js" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Test/Main.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/template/html/Connetor.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/template/html/flowNodeModal.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/template/html/TextOutput.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/FlowTexts.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/TextProperty.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/html/HtmlController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeProperty.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeCore.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeText.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/library/js/flow/initmodal.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/library/js/flow/mcgfn.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/library/js/index.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/library/js/common.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/text/FlowText.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/template/html/TextOutput.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/template/html/flowTextModal.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/library/js/flow/initmodal.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/template/html/flowNodeModal.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/html/HtmlController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/library/js/flow/mcgfn.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/template/flow/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/template/html/flowNodeSuspen.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/library/js/flow/htmlmodel.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeProperty.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/ehcache.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/CachePlugin.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/common/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/flow/CommonController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/library/js/flow/addition.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/NodeCache.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mcg/controller/DownloadController.java" />
       </list>
     </option>
   </component>
@@ -457,8 +319,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -519,7 +379,25 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="mcg" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
+              <item name="plugin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mcg-helper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mcg-helper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="mcg" type="462c0819:PsiDirectoryNode" />
+              <item name="plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="ehcache" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mcg-helper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mcg-helper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mcg-helper" type="b2602c69:ProjectViewProjectNode" />
@@ -576,6 +454,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -906,6 +786,11 @@
       <workItem from="1577854548269" duration="5704000" />
       <workItem from="1577878492818" duration="226000" />
       <workItem from="1577878795576" duration="671000" />
+      <workItem from="1577853319004" duration="7041000" />
+      <workItem from="1580889624392" duration="21000" />
+      <workItem from="1580901587302" duration="693000" />
+      <workItem from="1580965758129" duration="4299000" />
+      <workItem from="1581394877798" duration="4059000" />
     </task>
     <task id="LOCAL-00001" summary="reject to use other bar&#10;save text info and connector info(target and source)&#10;add connector tool menu, tool function need developing&#10;&#10;needing&#10;adding output type to text info &#10;complete info modify function and cancel function for connector&#10;adding input type according output type to connector info &#10;saving global info">
       <created>1574411346488</created>
@@ -960,7 +845,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="589865000" />
+    <option name="totallyTimeSpent" value="605978000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -981,11 +866,11 @@
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" sideWeight="0.50187266" side_tool="true" weight="0.22012103" />
       <window_info id="Web" order="6" sideWeight="0.50187266" side_tool="true" weight="0.22012103" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49812734" visible="true" weight="0.24281392" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" sideWeight="0.49812734" visible="true" weight="0.26096824" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.27751195" />
       <window_info anchor="bottom" id="Messages" order="2" weight="0.32854864" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49848714" weight="0.32376397" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49848714" weight="0.37958533" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49924356" weight="0.38437003" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -1079,136 +964,6 @@
     </SUITE>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://D:/java/src.zip!/java/util/Iterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="91" column="17" selection-start-line="91" selection-start-column="17" selection-end-line="91" selection-end-column="17" />
-          <folding>
-            <element signature="e#2496#2497#0" expanded="true" />
-            <element signature="e#2561#2562#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="858" selection-start-line="858" selection-end-line="858" />
-          <folding>
-            <element signature="e#10907#10908#0" expanded="true" />
-            <element signature="e#10945#10946#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/src.zip!/java/util/TreeMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10678">
-          <caret line="602" column="37" selection-start-line="602" selection-start-column="37" selection-end-line="602" selection-end-column="37" />
-          <folding>
-            <element signature="e#9063#9064#0" expanded="true" />
-            <element signature="e#9107#9108#0" expanded="true" />
-            <element signature="e#44601#44602#0" expanded="true" />
-            <element signature="e#44647#44648#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/src.zip!/java/util/AbstractSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2907">
-          <caret line="176" column="43" selection-start-line="176" selection-start-column="43" selection-end-line="176" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/src.zip!/java/util/AbstractCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4807">
-          <caret line="280" column="19" selection-start-line="280" selection-start-column="19" selection-end-line="280" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/src.zip!/java/util/TreeSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="275" selection-start-line="275" selection-end-line="275" />
-          <folding>
-            <element signature="e#3948#3949#0" expanded="true" />
-            <element signature="e#3974#3975#0" expanded="true" />
-            <element signature="e#4697#4698#0" expanded="true" />
-            <element signature="e#4742#4743#0" expanded="true" />
-            <element signature="e#8711#8712#0" expanded="true" />
-            <element signature="e#8750#8751#0" expanded="true" />
-            <element signature="e#10716#10717#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/ParamData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="950">
-          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1419#1420#0" expanded="true" />
-            <element signature="e#1461#1462#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/connector/ConnectorData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="e#1372#1373#0" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/ConnectorCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="28" column="54" lean-forward="true" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/filter/StartFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="64" column="31" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/common/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="50" column="34" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/ConnectController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1074">
-          <caret line="370" column="66" selection-start-line="370" selection-start-column="66" selection-end-line="370" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/ToolController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2698">
-          <caret line="174" column="32" selection-start-line="174" selection-start-column="32" selection-end-line="174" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="58" column="100" selection-start-line="58" selection-start-column="100" selection-end-line="58" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/task/McgTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1230,13 +985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-33">
           <caret line="21" column="49" lean-forward="true" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowConnectorSuspen.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="50" selection-start-line="10" selection-start-column="50" selection-end-line="10" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1313,13 +1061,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3306">
-          <caret line="174" column="20" selection-start-line="174" selection-start-column="20" selection-end-line="174" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowSqlExecuteModal.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -1327,53 +1068,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowNodeModal.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-286">
-          <caret line="41" column="54" lean-forward="true" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/FlowTexts.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/FlowText.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/html/HtmlController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="36" column="38" lean-forward="true" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/TextOutput.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="139" column="100" lean-forward="true" selection-start-line="139" selection-start-column="100" selection-end-line="139" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/TextCore.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/TextProperty.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/text/FlowText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeProperty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding>
-            <element signature="e#1458#1459#0" expanded="true" />
-            <element signature="e#1476#1477#0" expanded="true" />
-            <element signature="e#1513#1514#0" expanded="true" />
-            <element signature="e#1536#1537#0" expanded="true" />
-            <element signature="e#1568#1569#0" expanded="true" />
-            <element signature="e#1590#1591#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeCore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -1381,68 +1079,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowTextModal.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/Connetor.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="46" column="34" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/htmlmodel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="1241" column="34" selection-start-line="1241" selection-start-column="31" selection-end-line="1241" selection-end-column="34" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#0#6#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/initmodal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="284" column="15" selection-start-line="284" selection-start-column="12" selection-end-line="284" selection-end-column="15" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#0#6#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/mcgfn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="869" column="42" selection-start-line="869" selection-start-column="42" selection-end-line="869" selection-end-column="42" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#0#6#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
-          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -1451,8 +1091,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="143" column="44" selection-start-line="143" selection-start-column="37" selection-end-line="143" selection-end-column="44" />
+        <state relative-caret-position="271">
+          <caret line="146" column="52" lean-forward="true" selection-start-line="146" selection-start-column="52" selection-end-line="146" selection-end-column="52" />
           <folding>
             <element signature="n#style#0;n#pre#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
@@ -1475,17 +1115,251 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/text/FlowText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1159">
+          <caret line="102" column="22" lean-forward="true" selection-start-line="102" selection-start-column="22" selection-end-line="102" selection-end-column="22" />
+          <folding>
+            <element signature="e#2905#2906#0" expanded="true" />
+            <element signature="e#2923#2924#0" expanded="true" />
+            <element signature="e#2960#2961#0" expanded="true" />
+            <element signature="e#2983#2984#0" expanded="true" />
+            <element signature="e#3011#3012#0" expanded="true" />
+            <element signature="e#3029#3030#0" expanded="true" />
+            <element signature="e#3067#3068#0" expanded="true" />
+            <element signature="e#3090#3091#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="40" column="41" lean-forward="true" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowTextModal.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="31" column="59" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/flow/FlowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="160" column="62" selection-start-line="160" selection-start-column="62" selection-end-line="160" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/TextOutput.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1919">
+          <caret line="101" column="30" selection-start-line="101" selection-start-column="30" selection-end-line="101" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowNodeModal.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="75" column="57" lean-forward="true" selection-start-line="75" selection-start-column="57" selection-end-line="75" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-798">
+          <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/flow/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="76" column="82" lean-forward="true" selection-start-line="76" selection-start-column="82" selection-end-line="76" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/Connetor.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="7" column="86" selection-start-line="7" selection-start-column="86" selection-end-line="7" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowSuspension.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+        <state relative-caret-position="228">
+          <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowNodeSuspen.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/template/html/flowConnectorSuspen.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeProperty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="32" column="23" lean-forward="true" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/ehcache.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="49" column="25" lean-forward="true" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/entity/flow/Node/NodeText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/initmodal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="486" column="36" lean-forward="true" selection-start-line="486" selection-start-column="36" selection-end-line="486" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#0#6#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/htmlmodel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="904" column="18" lean-forward="true" selection-start-line="904" selection-start-column="18" selection-end-line="904" selection-end-column="18" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#0#6#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/CachePlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="31" column="55" lean-forward="true" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1484#1514#0" expanded="true" />
+            <element signature="e#2135#2136#0" expanded="true" />
+            <element signature="e#2197#2198#0" expanded="true" />
+            <element signature="e#2253#2254#0" expanded="true" />
+            <element signature="e#2324#2325#0" expanded="true" />
+            <element signature="e#2373#2374#0" expanded="true" />
+            <element signature="e#2444#2445#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/build/McgProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-50">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/InputCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/OutputCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="27" column="60" lean-forward="true" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/addition.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-549">
-          <caret line="62" column="31" lean-forward="true" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
+        <state relative-caret-position="-617">
+          <caret line="184" column="18" lean-forward="true" selection-start-line="184" selection-start-column="18" selection-end-line="184" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/flow/CommonController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="106" column="16" lean-forward="true" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="16" />
+          <folding>
+            <element signature="e#4326#4327#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/library/js/flow/mcgfn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="291" column="14" selection-start-line="291" selection-start-column="14" selection-end-line="291" selection-end-column="14" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#0#6#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/graduate_design/tomcat_embed/tomcat7/tomcat-embed-core.jar!/javax/servlet/ServletResponse.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/common/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="30" column="50" lean-forward="true" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/html/HtmlController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/plugin/ehcache/NodeCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="e#1102#1103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mcg/controller/DownloadController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-93">
+          <caret line="186" column="60" lean-forward="true" selection-start-line="186" selection-start-column="60" selection-end-line="186" selection-end-column="60" />
         </state>
       </provider>
     </entry>

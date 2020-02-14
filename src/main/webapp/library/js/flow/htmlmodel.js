@@ -607,7 +607,9 @@ function setDialogBtns(param) {
 					var result = JSON.parse(data);
 					var textCore = {};
 					textCore["source"] = param.editor.getValue();
-					result["textCore"] = textCore; 
+					result["textCore"] = textCore;
+					result["solo"] = getSolo();
+					result["type"] = getType();
 					result["flowId"] = getCurrentFlowId();
 					common.ajax({
 						url : "/flow/saveText",
@@ -876,7 +878,33 @@ function createModalCallBack(param) {
 		param["editor"] = editor;
 		
 		initJsonModal(param.modalId, editor);
-	} else if(param.eletype == "sqlQuery") {
+	}else if(param.eletype == "node"){
+		$("#" + param.modalId + "_outMode").selectpicker({
+			noneSelectedText: "请选择",
+			width:"100%"
+		});
+
+		var editor = ace.edit(param.modalId + "_editor");
+		editor.setTheme("ace/theme/eclipse");
+		editor.session.setMode("ace/mode/java");
+		editor.setFontSize(18);
+		//设置只读（true时只读，用于展示代码）
+		editor.setReadOnly(false);
+		//自动换行,设置为off关闭
+		editor.setOption("wrap", "off");
+		//启用提示菜单
+		ace.require("ace/ext/language_tools");
+		editor.setOptions({
+			enableBasicAutocompletion: true,
+			enableSnippets: true,
+			enableLiveAutocompletion: true
+		});
+		editorScreen($("#" + param.modalId + "_textId").val(), editor);
+		param["editor"] = editor;
+
+		initNodeModal(param.modalId, editor);
+	}
+	else if(param.eletype == "sqlQuery") {
 		$(".selectpicker").selectpicker({
 			noneSelectedText: "请选择",
 			liveSearch: true,
@@ -958,6 +986,7 @@ function createModalCallBack(param) {
 		param["editor"] = editor;
 		
 		initTextModal(param.modalId, editor);
+		// setTypeAndSoloValue();
 	} else if(param.eletype == "script") {
 		var editor = ace.edit(param.modalId + "_editor");
 		editor.setTheme("ace/theme/eclipse");

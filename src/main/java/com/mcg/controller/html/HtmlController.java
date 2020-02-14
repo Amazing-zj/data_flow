@@ -142,11 +142,6 @@ public class HtmlController extends BaseController {
 		PageData pd = this.getPageData();
 		mv.addObject("modalId", pd.get("modalId"));
 		mv.addObject("outModes", FlowTextOutModeEnum.values());
-		if(pd.get("type") == null){
-			mv.addObject("type" , "void");
-		} else{
-			mv.addObject("type",pd.get("type"));
-		}
 		mv.setViewName("html/flowNodeModal");
 		return mv;
 	}

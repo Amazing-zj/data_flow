@@ -19,7 +19,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<script language="JavaScript">
+    function setTypeAndSoloValue(type,solo) {
+        $("#${modalId}_type").val(type);
+        if(solo == true){
+            $("#Y").attr("checked",true);
+        }else{        
+            $("#N").attr("checked",true);
+        }
+    }
+    function getSolo(){
+        var solo = $("input[name = 'solo']:checked").val();
+        if(solo == "Y"){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function getType(){
+        return $("#${modalId}_type").val();
+    }
+</script>
+<div id = "id" name="${modalId}" style="display: none"></div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -61,27 +82,24 @@
                                     <input type="text" id="${modalId }_fileName" name="textProperty[fileName]"
                                            class="form-control" disabled="true" value = "don't need edit"/>
                                 </div>
-
-<%--                                <label class="col-sm-1 control-label">输出方式</label>--%>
-<%--                                <div class="col-sm-4">--%>
-<%--                                    <div class="fg-line">--%>
-<%--                                        <select id="${modalId }_outMode" name="textProperty[outMode]"--%>
-<%--                                                class="selectpicker">--%>
-<%--                                            <c:forEach items="${outModes}" var="item">--%>
-<%--                                                <option value="${item.value }">${item.name }</option>--%>
-<%--                                            </c:forEach>--%>
-<%--                                        </select>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                             </div>
-<%--                            <div class="form-group">--%>
-<%--                                <label class="col-sm-2 control-label">输出路径</label>--%>
-<%--                                <div class="fg-line col-sm-9">--%>
-<%--                                    <input type="text" id="${modalId }_outPutPath" name="textProperty[outPutPath]"--%>
-<%--                                           class="form-control"/>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
+                             <div class = "form-group">
+                            <label class="col-sm-2 control-label">return</label>
+                            <div class = "col-sm-4">
+                                <div class="fg-line">
+                                    <input type="text" id = "${modalId}_type" value = "${type}">
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label">solo</label>
+                            <div class = "col-sm-4">
+                                <div class="fg-line">
+                                    <input type="hidden" id="solo" value = "${solo}">
+                                    <input type="radio" id="Y" name="solo" value="Y">
+                                    <input type="radio" id="N" name="solo" value="N">
+                                </div>
+                            </div>
                         </div>
+                    </div>
                         <div class="tab-pane fade" id="${modalId }_textCore">
                             <div class="form-group">
                                 <div class="col-sm-12">

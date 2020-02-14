@@ -31,25 +31,7 @@ public class NodeProperty implements Serializable {
     private String name = null;
     @XmlElement
     private String key;
-    @XmlElement
-    private String fileName;
-    @XmlElement
-    private String type = null;
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
     public String getName() {
         return name;
     }

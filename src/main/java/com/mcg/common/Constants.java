@@ -28,6 +28,7 @@ import java.nio.charset.Charset;
  */
 public class Constants {
 
+	public static final String NODE = "nodeCache";
 	public static final String DEPEN = "depenCache";
 	public static final String INPUT = "inputCache";
 	public static final String OUTPUT = "outputCache";

@@ -75,7 +75,7 @@
 												<div id="toolbarText" class="toolbar_eletype" eletype="text">文本</div>
 											</div>	
 											<div class="col-md-4 col-md-offset-1">
-												<div id="toolbarSqlQuery" class="toolbar_eletype" eletype="sqlQuery">sql查询</div>
+												<div id="toolbarNode2" class="toolbar_eletype" eletype="Node">Nodde</div>
 											</div>
 										</div>
 										<div class="row">
@@ -130,7 +130,7 @@
                                                 <div id="toolbarText2" class="toolbar_eletype" eletype="text">文本</div>
                                             </div>
 											<div class="col-md-4 col-md-offset-1">
-												<div id="toolbarInfo" class="toolbar_eletype" eletype="info">信息</div>
+												<div id="toolbarNode" class="toolbar_eletype" eletype="node">Node</div>
 											</div>
                                         </div>
                                     </div>

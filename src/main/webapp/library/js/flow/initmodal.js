@@ -492,6 +492,7 @@ function initTextModal(id, editor) {
 		if(data != null && data != undefined && data.textCore != undefined) {
 			editor.setValue(data.textCore.source);
 		}
+		setTypeAndSoloValue(data.type, data.solo);
 	});
 }
 

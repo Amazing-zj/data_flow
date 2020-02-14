@@ -134,13 +134,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class = "form-group">
-                                <div class = "col-sm-4">
-                                    <div class="fg-line">
-                                        <input type="text" id = "${modalId}_type" value = "${type}">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label name = "dataType" class="col-sm-2 control-label" style="text-align: center">data type</label>
                                 <label name = "dataName" class="col-sm-2 control-label" style="text-align: center">data name</label>

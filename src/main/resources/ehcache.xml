@@ -53,5 +53,12 @@
 		   diskPersistent="false"
 		   memoryStoreEvictionPolicy="LRU" />
 
+	<cache name="nodeCache"
+		   eternal="true"
+		   maxElementsInMemory="100"
+		   overflowToDisk="false"
+		   diskPersistent="false"
+		   memoryStoreEvictionPolicy="LRU" />
+
 
 </ehcache>  

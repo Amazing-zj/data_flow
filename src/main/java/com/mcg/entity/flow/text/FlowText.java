@@ -47,6 +47,13 @@ public class FlowText extends FlowBase implements Comparable{
 	@Valid
 	@XmlElement
 	private TextCore textCore;
+	@Valid
+	@XmlElement
+	private String type;
+	@Valid
+	@XmlElement
+	private boolean solo;
+
 
 	@Override
 	public int compareTo(Object o) {
@@ -93,4 +100,19 @@ public class FlowText extends FlowBase implements Comparable{
 		this.textCore = textCore;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public boolean isSolo() {
+		return solo;
+	}
+
+	public void setSolo(boolean solo) {
+		this.solo = solo;
+	}
 }

@@ -54,31 +54,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">文件名称</label>
-                                <div class="fg-line col-sm-4">
-                                    <input type="hidden" id="${modalId }_textId" name="textId" value="${modalId }"/>
-                                    <input type="text" id="${modalId }_fileName" name="textProperty[fileName]"
-                                           class="form-control" disabled="true" value = "don't need edit"/>
-                                </div>
-
-<%--                                <label class="col-sm-1 control-label">输出方式</label>--%>
-<%--                                <div class="col-sm-4">--%>
-<%--                                    <div class="fg-line">--%>
-<%--                                        <select id="${modalId }_outMode" name="textProperty[outMode]"--%>
-<%--                                                class="selectpicker">--%>
-<%--                                            <c:forEach items="${outModes}" var="item">--%>
-<%--                                                <option value="${item.value }">${item.name }</option>--%>
-<%--                                            </c:forEach>--%>
-<%--                                        </select>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-                            </div>
 <%--                            <div class="form-group">--%>
-<%--                                <label class="col-sm-2 control-label">输出路径</label>--%>
-<%--                                <div class="fg-line col-sm-9">--%>
-<%--                                    <input type="text" id="${modalId }_outPutPath" name="textProperty[outPutPath]"--%>
-<%--                                           class="form-control"/>--%>
+<%--                                <label class="col-sm-2 control-label">文件名称</label>--%>
+<%--                                <div class="fg-line col-sm-4">--%>
+<%--                                    <input type="hidden" id="${modalId }_textId" name="textId" value="${modalId }"/>--%>
+<%--                                    <input type="text" id="${modalId }_fileName" name="textProperty[fileName]"--%>
+<%--                                           class="form-control" disabled="true" value = "don't need edit"/>--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
                         </div>
@@ -93,7 +74,8 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="fg-line">
-                                        the text to edit code and as the node in data flow
+                                        struct node, edit struct, class, or function here.
+                                        Only one struct you are supported to edit!!!
                                     </div>
                                 </div>
                             </div>
