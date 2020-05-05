@@ -13,17 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Main {
     private static List<ConnectorData> list;
     public static void main(String[] args) throws Exception{
-        git();
+
     }
 
-    private static void git()throws  Exception{
-        String url = "https://github.com/Udeanstorm/tool.git";
-        String local = "D://git//udean";
-        String username  = "udeanstorm";
-        String branch = "dev";
-        String username1 = "369573906@qq.com";
-        String password = "pw22442244";
-    }
+
 
     private static void persistent() throws  Exception{
         String path = "E://recovery//seri.class";

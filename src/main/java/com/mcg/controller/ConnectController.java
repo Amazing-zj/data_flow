@@ -45,27 +45,21 @@ public class ConnectController {
     private  Logger logger = LoggerFactory.getLogger(ConnectController.class);
 
      {
-        index = 0;
-        indexMap = new HashMap<>();
+        index = 0; //how many connectors
+        indexMap = new HashMap<>(); // connector index for dependency
         reindexMap = new HashMap<>();
-        list = new LinkedList<>();
+        list = new LinkedList<>(); // connectors list
         canUse = new AtomicBoolean(true);
     }
-
-//    public static void cachePersistent(BufferedWriter bw) throws Exception {
-//        ConnectorData keySet[] = new ConnectorData[list.size()];
-//        int i = 0;
-//        for (ConnectorData temp : list) {
-//            keySet[i++] = temp;
-//        }
-//        ToolController.cachePersistent(keySet, bw);
-//    }
 
     @RequestMapping(value = "/delAll", method = RequestMethod.GET)
     @ResponseBody
     public McgResult delAll() {
         McgResult result = new McgResult();
         result.setStatusCode(0);
+        if(index == 0) {
+            return result;
+        }
         for (int i = 0; i < index; i++) {
             if (!ConnectorCache.remove(i)) {
                 if (ConnectorCache.hasKey(i) && list.get(i) != null) {
@@ -306,6 +300,7 @@ public class ConnectController {
             list[s].add(t);
             in[t]++;
         }
+        Date start = new Date();
         in = Arrays.copyOf(in, nodeIndex);
         List<String> queueRank = new LinkedList<>();
         for (int i = 0; i < nodeIndex; i++) {
@@ -333,6 +328,7 @@ public class ConnectController {
                 DependencyCache.put(queueRank);
             }
         } while (!queue.isEmpty());
+        logger.info("dependency judge time: "+ (new Date().getTime() - start.getTime())+ " ms");
         if (count == nodeIndex)
             return false;
         else {
@@ -563,7 +559,6 @@ public class ConnectController {
      */
     private void updateOutput(String source, String []type, String []name, Set<ParamData>set, McgResult result){
         List<ConnectorData> target = ConnectorCache.getTargetListBySource(source);
-        List<ParamData>delete = new LinkedList<>();
         if (type.length != name.length) {
             result.setStatusCode(1);
             logger.error("type length " + type.length + " is not equal to name length " + name.length);
@@ -582,7 +577,6 @@ public class ConnectController {
                         break;
                     }
                     list.add(t_list.remove(index));
-                    delete.add(temp);
                 } else {
                     list.add(new ParamData(source, type[i], name[i]));
                 }
@@ -590,10 +584,12 @@ public class ConnectController {
             OutputCache.put(source, list);
             if(temp != null) {
                 logger.info("save output cache with key " + source);
-                set.removeAll(delete);
+                set.removeAll(list);
+                t_list = new LinkedList<>();
+                t_list.addAll(set);
                 if (set.size() != 0 && target != null && target.size() != 0) {
                     for (ConnectorData data : target) {
-                        updateInput(data, delete);
+                        updateInput(data, t_list);
                     }
                 }
             }else{

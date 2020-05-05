@@ -32,20 +32,42 @@ import java.util.ArrayList;
 public class NodeText extends FlowBase implements Comparable{
 
     private static final long serialVersionUID = -6575685975247235282L;
-    @NotBlank(message = "{flowText.textId.notBlank}")
+    @NotBlank(message = "{flowText.nodeId.notBlank}")
     @XmlAttribute
-    private String textId;
+    private String nodeId;
     @Valid
     @XmlElement
-    private NodeProperty textProperty;
+    private NodeProperty nodeProperty;
     @Valid
     @XmlElement
-    private NodeCore textCore;
+    private NodeCore nodeCore;
+
+    public NodeProperty getNodeProperty() {
+        return nodeProperty;
+    }
+
+    public void setNodeProperty(NodeProperty nodeProperty) {
+        this.nodeProperty = nodeProperty;
+    }
+
+    public NodeCore getNodeCore() {
+        return nodeCore;
+    }
+
+    public void setNodeCore(NodeCore nodeCore) {
+        this.nodeCore = nodeCore;
+    }
+
+    @Override
+    public String toString() {
+
+        return  "name: " +nodeProperty.getName() + " code: " +nodeCore.getSource();
+    }
 
     @Override
     public int compareTo(Object o) {
         NodeText o1 = (NodeText)o;
-        return textId.compareTo(o1.textId);
+        return nodeId.compareTo(o1.nodeId);
     }
 
     @Override
@@ -63,28 +85,13 @@ public class NodeText extends FlowBase implements Comparable{
         return runResult;
     }
 
-    public String getTextId() {
-        return textId;
+    public String getNodeId() {
+        return nodeId;
     }
 
-    public void setTextId(String textId) {
-        this.textId = textId;
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
     }
 
-    public NodeProperty getTextProperty() {
-        return textProperty;
-    }
-
-    public void setTextProperty(NodeProperty textProperty) {
-        this.textProperty = textProperty;
-    }
-
-    public NodeCore getTextCore() {
-        return textCore;
-    }
-
-    public void setTextCore(NodeCore textCore) {
-        this.textCore = textCore;
-    }
 
 }

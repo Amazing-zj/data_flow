@@ -41,19 +41,20 @@ public class FlowText extends FlowBase implements Comparable{
 	@NotBlank(message = "{flowText.textId.notBlank}")
 	@XmlAttribute
 	private String textId;
-	@Valid
 	@XmlElement
 	private TextProperty textProperty;
-	@Valid
 	@XmlElement
 	private TextCore textCore;
-	@Valid
 	@XmlElement
 	private String type;
-	@Valid
 	@XmlElement
 	private boolean solo;
 
+
+	@Override
+	public String toString() {
+		return "name: " + textProperty.getName() + " " +type + " " + solo;
+	}
 
 	@Override
 	public int compareTo(Object o) {

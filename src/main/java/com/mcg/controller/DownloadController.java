@@ -22,13 +22,13 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mcg.entity.common.McgResult;
 import com.mcg.entity.flow.Node.NodeText;
 import com.mcg.entity.flow.connector.ParamData;
 import com.mcg.entity.flow.text.FlowText;
-import com.mcg.plugin.ehcache.DependencyCache;
-import com.mcg.plugin.ehcache.InputCache;
-import com.mcg.plugin.ehcache.NodeCache;
-import com.mcg.plugin.ehcache.OutputCache;
+import com.mcg.plugin.ehcache.*;
+import com.mcg.util.SSH;
+import com.sun.deploy.net.HttpResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +36,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mcg.common.Constants;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 
@@ -50,6 +51,7 @@ public class DownloadController {
 
 	private static Logger logger = LoggerFactory.getLogger(DownloadController.class);
 	private static Map<String, FlowText> map = null;
+    private static int static_index = 0;
 
 	public static void setMap(Map map1){
 	    map = map1;
@@ -151,6 +153,39 @@ public class DownloadController {
         
         return null;
     }
+    /**
+     * DESC : download file from remote service
+     * DATA : 2020/3/9 13:26
+     * AUTHOR : UDEAN
+     */
+    @RequestMapping("downloadCode")
+    public void down(String host, String userName, String password, String Dir, String saveDir, String fileName, HttpServletResponse response){
+        response.setCharacterEncoding(Constants.CHARSET.toString());
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+        logger.info("from " + Dir + "/" + fileName + " to " + saveDir );
+        OutputStream os =  null;
+        try{
+            os = response.getOutputStream();
+            if(os != null){
+                logger.info("---------start downloading-------------");
+                File file = SSH.download(host, userName, password, Dir, saveDir, fileName);
+                if(file.exists()){
+                    BufferedReader bw = new BufferedReader(new FileReader(file));
+                    String s = null;
+                    while((s = bw.readLine()) != null){
+                        os.write(s.getBytes());
+                        os.write(newline);
+                    }
+                }
+                logger.info("---------download finish-------------");
+                os.close();
+            }
+        }catch (Exception e){
+            logger.debug(e.getMessage());
+        }
+
+    }
 
     /**
      * DESC : invoke compiler to transform code and save file to local
@@ -158,39 +193,23 @@ public class DownloadController {
      * AUTHOR : UDEAN
      */
     @RequestMapping("compilerCode")
-    public String compiler(String text, String random, HttpServletRequest request, HttpServletResponse response) {
-        response.setCharacterEncoding(Constants.CHARSET.toString());
-        response.setContentType("multipart/form-data");
-        response.setHeader("Content-Disposition", "attachment;fileName=" + DownloadController.convertCharacterEncoding(request, "Main" + Constants.EXTENSION2));
-        OutputStream os = null;
-        try {
-            os = response.getOutputStream();
-            if (os != null) {
-                os.write(text.getBytes());
-            }
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-        }
-        finally {
-            try {
-                if (os != null) {
-                    os.flush();
-                    os.close();
-                }
-            } catch (IOException e) {
-                logger.error(e.getMessage());
-            }
-        }
-        return null;
+    @ResponseBody
+    public McgResult compiler(String text, String host, String password, String userName, String Dir, HttpServletResponse response) {
+        McgResult result = new McgResult();
+            SSH.upload(host, userName, password, Dir, text);
+            response.setStatus(100);
+            result.setStatusCode(1);
+        return result;
     }
 
+    private static byte [] newline = "\n".getBytes(Constants.CHARSET);
     private void CodeTrans(OutputStream os)throws Exception{
-        byte [] newline = "\n".getBytes(Constants.CHARSET);
         int dependency = DependencyCache.size();
         int i = 0;
-        int index = 0;
+        int index = static_index;
         int name_index = 0;
         String Parm = "Source_";
+        Date start = new Date();
         while(i < dependency){
             List<String> list = (List)DependencyCache.get(i++);
             for(String str: list){
@@ -204,11 +223,16 @@ public class DownloadController {
                 Set<ParamData> paramOutDataSet = (Set) OutputCache.get(str);
                 Map<String,ParamData>paramInDataMap = (HashMap) InputCache.get(str);
                 StringBuilder text;
+                if(StringUtils.isNotBlank(flowText.getType())) {
+                     text = new StringBuilder(flowText.getType());
+                }else{
+                    text = new StringBuilder("void");
+                }
                 if(StringUtils.isNotBlank(flowText.getTextProperty().getName()) && isNameLegal(flowText.getTextProperty().getName())) {
-                    text = new StringBuilder("void ");
+                    text.append(" ");
                     text.append(flowText.getTextProperty().getName()+"(");
                 }else{
-                    text = new StringBuilder("void Program_");
+                    text.append(" Process_");
                     text.append(++name_index + "(");
                 }
                 if(paramInDataMap != null && paramInDataMap.size() != 0){
@@ -251,8 +275,66 @@ public class DownloadController {
                 os.write(newline);
                 os.write(newline);
             }
+            static_index = index;
+        }
+        logger.info("trans code time: "+ (new Date().getTime() - start.getTime())+ " ms");
+        try {
+            saveSingle(os);
+        }catch (Exception e){
+            logger.error(e.getMessage());
         }
 
+        try {
+            saveNode(os);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
+    }
+
+    private void notDepency(OutputStream os){
+        try {
+            saveSingle(os);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
+
+        try {
+            saveNode(os);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
+    }
+
+    private void saveSingle(OutputStream os) throws Exception{
+        List list =CachePlugin.getAll();
+        if(list.size() >0){
+            StringBuffer string = new StringBuffer();
+            char index= 'A';
+            for(FlowText flowText :(List<FlowText>) list) {
+                if (flowText.isSolo()) {
+                    string.append(flowText.getType()+ " ");
+                    if (StringUtils.isNotBlank(flowText.getTextProperty().getName()) && isNameLegal(flowText.getTextProperty().getName())){
+                        string.append(flowText.getTextProperty().getName());
+                    }else{
+                        string.append("Singel_"+index++);
+                    }
+                    string.append("(;){\n" + flowText.getTextCore().getSource()+"\n}\n");
+                }
+            }
+            os.write(string.toString().getBytes());
+        }
+    }
+
+    private void saveNode(OutputStream os) throws Exception{
+        List<NodeText> list = NodeCache.getAll();
+        logger.debug(String.valueOf(list.size()));
+        if(list.size()>0){
+            byte [] newline = "\n".getBytes(Constants.CHARSET);
+            for(NodeText nodeText : list){
+                os.write(nodeText.getNodeCore().getSource().getBytes());
+                os.write(newline);
+            }
+        }
     }
 
     private void addNode(OutputStream os) throws Exception{
@@ -260,7 +342,7 @@ public class DownloadController {
         if(list != null && list.size() != 0){
             for(String key : list){
                 NodeText text = (NodeText)NodeCache.get(key);
-                os.write(text.getTextCore().getSource().getBytes());
+                os.write(text.getNodeCore().getSource().getBytes());
             }
             // TODO: 2020/2/11 13:18 delete NodeCache cache data
         }

@@ -65,6 +65,14 @@ public class HtmlController extends BaseController {
 		return mv;
 	}
 
+	//acquire node suspend
+	@RequestMapping(value="/flowNodeSuspen")
+	public ModelAndView getNodeSuspensionModal() throws Exception{
+		ModelAndView mv = this.getModelAndView();
+		mv.setViewName("html/flowNodeSuspen");
+		return mv;
+	}
+
 	@RequestMapping(value = "/Connector")
 	public ModelAndView getConnectorModel()throws  Exception{
 		ModelAndView mv = this.getModelAndView();

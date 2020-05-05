@@ -169,7 +169,11 @@ function flowDropBind() {
 		        //重绘流程区节点和连接线
 				repaint(this);
 		 		//初始化流程节点工具层
-				initPopover();
+				if(ui.draggable.attr("eletype") == "text") {
+					initPopover();
+				}else{
+					initNodePopover();
+				}
 		 		//初始化流程节点拖拽功能和连接线连接功能
 				initConnectLine();
 				resetLabel();
@@ -770,6 +774,8 @@ function initHtmlTools() {
 	baseMap.put("popoverContent", dataHtml);
 	var connectDataHtml = setHtmlTool("/html/flowConnectorSuspen", null);
 	baseMap.put("connectorPopover",connectDataHtml);
+	var nodeHtml = setHtmlTool("/html/flowNodeSuspen", null);
+	baseMap.put("nodePopover",nodeHtml);
 }
 
 /* 生成Modal的id */

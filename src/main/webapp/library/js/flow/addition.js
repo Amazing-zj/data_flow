@@ -1,5 +1,46 @@
 /---------------test-------------------/
 var labelMap = new Map();
+var nodeList = [];
+nodeList.push("void");
+nodeList.push("int");
+nodeList.push("long");
+nodeList.push("double");
+nodeList.push("float");
+nodeList.push("Object");
+/**
+ * DESC : init node suspend
+ * DATA : 2020/2/25 12:36
+ * AUTHOR : UDEAN
+ */
+function initNodePopover() {
+    $("#flowarea").children("[data-toggle='popover']").popover({
+//		delay:{ show: 0, hide: 1000 },
+        trigger:"manual",//manual,focus,click
+        placement:"bottom",
+//		title:"流程节点工具层",
+        html:true,
+        container: $("#flowarea"),
+        animation: false,
+        content:baseMap.get("nodePopover")
+    }).on("mouseenter", function () {
+        removePopover();
+        var _this = this;
+        $(this).popover("show");
+        $(this).siblings(".popover").on("mouseleave", function () {
+            $(_this).popover('hide');
+        });
+    }).on("mouseleave", function () {
+        var _this = this;
+        setTimeout(function () {
+            if (!$(".popover:hover").length) {
+                $(_this).popover("hide")
+            }
+        }, 100);
+    }).on("show.bs.popover", function() {
+        var _this = this;
+        baseMap.put("selector", $(_this).attr("id"));
+    });
+}
 
 /**
  * DESC : delete relative targetMap data
@@ -211,11 +252,11 @@ function getNodeDataById(id, func) {
  */
 function initNodeModal(id, editor) {
     getNodeDataById(id, function(data) {
-        if(data != null && data != "" && data != undefined && data.textProperty != undefined) {
+        if(data != null && data != "" && data != undefined && data.nodeProperty != undefined) {
             common.formUtils.setValues(id + "_textForm", data);
         }
-        if(data != null && data != undefined && data.textCore != undefined) {
-            editor.setValue(data.textCore.source);
+        if(data != null && data != undefined && data.nodeCore != undefined) {
+            editor.setValue(data.nodeCore.source);
         }
     });
 }
@@ -729,10 +770,9 @@ function delCache() {
  */
 function delAll() {
     common.ajax({
-            // "url":"/connect/delAll",
-        "url":"/connect/test",
-            "type":"get",
-        "data" : "callback=0"
+            "url":"/connect/test",
+            "data" : "callback = 1",
+            "type":"get"
         },function (data) {
             if(data.statusCode == 1){
                 Messenger().post({
@@ -750,9 +790,6 @@ function delAll() {
                         showCloseButton: true
                     })
                 }
-                //send connectors data several time
-                // acquireConnectors(flowIsLegal);
-                //send connectors data one time
                 sendAllConnectors(flowIsLegal);
 
             }
@@ -808,7 +845,7 @@ function sendAllConnectors(callback) {
             "url": "/connect/test",
             "type": "get",
             // "data": "length=" + array.length
-            "data" : "callback=0"
+            "data" : "callback = 0"
         }, function (data) {
             if (data.statusCode == 0) {
                 var len = 0;
@@ -826,7 +863,7 @@ function sendAllConnectors(callback) {
                         "url": "/connect/test",
                         "type": "POST",
                         // "data": "sourceId=" + sList + "&targetId=" + tList
-                        "data" : "callback=0"
+                        "data" : "callback = 0"
                     }, function (data) {
                         if (data.statusCode == 0) {
                             Messenger().post({

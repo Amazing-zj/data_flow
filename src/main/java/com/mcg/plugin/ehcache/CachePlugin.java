@@ -23,6 +23,9 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class CachePlugin {
 
     private static CacheManager cacheManager = ((CacheManager)SpringContextHelper.getSpringBean("cacheManager"));
@@ -71,5 +74,19 @@ public class CachePlugin {
 
     public static void removeCacheObjectAll() {
         cacheManager.getCache(Constants.CACHE_NAME).removeAll();
-    }    
+    }
+
+    public static List getAll(){
+        Cache cache = cacheManager.getCache(Constants.CACHE_NAME);
+        List result  = new LinkedList();
+        if (cache != null) {
+            List keys = cache.getKeys();
+            if(keys != null && keys.size() > 0){
+                for(Object key :keys){
+                    result.add(cache.get(key).getObjectValue());
+                }
+            }
+        }
+        return result;
+    }
 }

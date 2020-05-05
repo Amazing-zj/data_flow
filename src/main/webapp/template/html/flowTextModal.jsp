@@ -20,6 +20,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script language="JavaScript">
+    $(document).ready(function () {
+        var node = $("#${modalId}_type");
+        var index = 0;
+        while(index < nodeList.length){
+            var addNode = $("<option>"+nodeList[index]+"</option>");
+            node.append(addNode);
+            index++;
+        }
+    })
     function setTypeAndSoloValue(type,solo) {
         $("#${modalId}_type").val(type);
         if(solo == true){
@@ -87,7 +96,9 @@
                             <label class="col-sm-2 control-label">return</label>
                             <div class = "col-sm-4">
                                 <div class="fg-line">
-                                    <input type="text" id = "${modalId}_type" value = "${type}">
+<%--                                    <input type="text" id = "${modalId}_type" value = "${type}">--%>
+                                    <select name="type" id="${modalId}_type">
+                                    </select>
                                 </div>
                             </div>
                             <label class="col-sm-2 control-label">solo</label>

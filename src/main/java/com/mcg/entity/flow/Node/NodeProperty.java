@@ -16,6 +16,9 @@
 
 package com.mcg.entity.flow.Node;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -27,10 +30,11 @@ import java.io.Serializable;
 public class NodeProperty implements Serializable {
 
     private static final long serialVersionUID = 6530805633259002156L;
+    @NotBlank(message = "NodeProperty.name = null")
     @XmlElement
-    private String name = null;
-    @XmlElement
-    private String key;
+    private String name ;
+//    @XmlElement
+//    private String key;
 
     public String getName() {
         return name;
@@ -38,11 +42,11 @@ public class NodeProperty implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public String getKey() {
-        return key;
-    }
-    public void setKey(String key) {
-        this.key = key;
-    }
+//    public String getKey() {
+//        return key;
+//    }
+//    public void setKey(String key) {
+//        this.key = key;
+//    }
 
 }

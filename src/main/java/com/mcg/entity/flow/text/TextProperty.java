@@ -36,33 +36,33 @@ public class TextProperty implements Serializable {
     @XmlElement
     private String key;	
 //	@NotBlank(message = "{flowText.textProperty.fileName.notBlank}")
-	@XmlElement
-	private String fileName;
+//	@XmlElement
+//	private String fileName;
 //	@NotBlank(message = "{flowText.textProperty.outMode.notBlank}")
-	@XmlElement
-	private String outMode;
+//	@XmlElement
+//	private String outMode;
 //	@NotBlank(message = "{flowText.textProperty.outPutPath.notBlank}")
-	@XmlElement
-	private String outPutPath;
-	
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public String getOutMode() {
-		return outMode;
-	}
-	public void setOutMode(String outMode) {
-		this.outMode = outMode;
-	}
-	public String getOutPutPath() {
-		return outPutPath;
-	}
-	public void setOutPutPath(String outPutPath) {
-		this.outPutPath = outPutPath;
-	}
+//	@XmlElement
+//	private String outPutPath;
+//
+//	public String getFileName() {
+//		return fileName;
+//	}
+//	public void setFileName(String fileName) {
+//		this.fileName = fileName;
+//	}
+//	public String getOutMode() {
+//		return outMode;
+//	}
+//	public void setOutMode(String outMode) {
+//		this.outMode = outMode;
+//	}
+//	public String getOutPutPath() {
+//		return outPutPath;
+//	}
+//	public void setOutPutPath(String outPutPath) {
+//		this.outPutPath = outPutPath;
+//	}
     public String getName() {
         return name;
     }

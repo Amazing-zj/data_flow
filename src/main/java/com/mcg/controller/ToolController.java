@@ -70,7 +70,7 @@ public class ToolController extends BaseController {
 		}
 
 		DownloadController.setMap(map);
-		codeTrans(map);
+		//codeTrans(map);
 		return modeAndView;
 	}
 
@@ -80,11 +80,27 @@ public class ToolController extends BaseController {
 	 * AUTHOR : UDEAN
 	 */
 	@RequestMapping(value = "/compiler", method = RequestMethod.POST)
-	public ModelAndView invokeCompiler(String text, String random) {
+	public ModelAndView invokeCompiler(String text, String IP, String name, String password, String Dir) {
 		ModelAndView mv = new ModelAndView("redirect:/compilerCode");
-		logger.debug(text);
-		mv.addObject("text", text.replaceAll("Level", "P"));
-		mv.addObject("random", random);
+		mv.addObject("text", text);
+
+		mv.addObject("host", IP);
+		mv.addObject("password", password);
+		mv.addObject("userName", name);
+		mv.addObject("Dir", Dir);
+		return mv;
+	}
+
+	@RequestMapping(value = "/download", method = RequestMethod.POST)
+	public ModelAndView invokeDownload(String IP, String name, String password, String Dir, String local, String file){
+		ModelAndView mv = new ModelAndView("redirect:/downloadCode");
+		mv.addObject("host", IP);
+		mv.addObject("password", password);
+		mv.addObject("userName", name);
+		mv.addObject("Dir", Dir);
+		logger.info("input local dir: "+local);
+		mv.addObject("saveDir", "/");
+		mv.addObject("fileName", file);
 		return mv;
 	}
 

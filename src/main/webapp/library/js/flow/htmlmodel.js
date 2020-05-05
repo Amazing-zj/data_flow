@@ -633,6 +633,42 @@ function setDialogBtns(param) {
 				}
 			}
 		];			
+	}else if(param.eletype == "node") {
+		buttons = [
+			{
+				class: "btn btn-primary",
+				text: "保存",
+				click: function() {
+					var _this = this;
+					var data = $("#" + param.modalId + "_textForm").serializeJSON();
+					var result = JSON.parse(data);
+					var nodeCore = {};
+					result["nodeId"] = getNodeId();
+					nodeCore["source"] = param.editor.getValue();
+					result["nodeCore"] = nodeCore;
+					result["flowId"] = getCurrentFlowId();
+					common.ajax({
+						url : "/flow/saveNode",
+						type : "POST",
+						data : JSON.stringify(result),
+						contentType : "application/json"
+					}, function(data) {
+						if(data.statusCode == 1) {
+							saveElementUpdateCache(param.modalId, result.nodeProperty.name);
+							$( _this ).dialog( "destroy" );
+						}
+					});
+
+				}
+			},
+			{
+				class: "btn btn-default",
+				text: "关闭",
+				click: function() {
+					$( this ).dialog( "destroy" );
+				}
+			}
+		];
 	} else if(param.eletype == "dataSource") {
 		buttons = [
 			{

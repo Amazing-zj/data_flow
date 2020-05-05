@@ -28,7 +28,7 @@ public class NodeCore implements Serializable {
 
     private static final long serialVersionUID = 5126070126466648937L;
     @XmlElement
-    private String source;
+    private String source = null;
 
     public String getSource() {
         return source;

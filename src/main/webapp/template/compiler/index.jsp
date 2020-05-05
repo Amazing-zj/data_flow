@@ -49,6 +49,52 @@
                     }
                 };
             });
+            $("#download").bind("click",function () {
+                var form = $("<form>");
+                form.attr("style", "display:none");
+                form.attr("method", "post");
+                form.attr("action", baseUrl + "/tool/download");
+                var value = $("#IP").val();
+                var flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","IP");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#password").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","password");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#name").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","name");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#Dir").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","Dir");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#local").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","local");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#file").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","file");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                $("#compiler").append(form);
+                form.submit();
+                form.remove();
+            });
+
             $("#compiler").bind("click",function () {
                 var form = $("<form>");
                 form.attr("style", "display:none");
@@ -58,15 +104,37 @@
                 flowIdInput.attr("type","hidden");
                 flowIdInput.attr("name","text");
                 flowIdInput.attr("value",text);
-                alert(text);
                 form.append(flowIdInput);
                 flowIdInput = $("<input>");
                 flowIdInput.attr("type","hidden");
                 flowIdInput.attr("name","random");
                 flowIdInput.attr("value",seed);
-                form.append(flowIdInput)
+                form.append(flowIdInput);
+                var value = $("#IP").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","IP");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#password").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","password");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#name").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","name");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
+                value = $("#Dir").val();
+                flowIdInput = $("<input>");
+                flowIdInput.attr("type","hidden");
+                flowIdInput.attr("name","Dir");
+                flowIdInput.attr("value",value);
+                form.append(flowIdInput);
                 $("#compiler").append(form);
-
                 form.submit();
                 form.remove();
             });
@@ -77,14 +145,22 @@
 <body>
 <!-- 主面body开始 -->
 <div id="mcg_body" class="container-fluid autoHeight" >
-    <div class="row autoHeight" style="width:30% ; height: 20%">
-        <div>
-            <input id="select"  type="file" style="float:left ;" >select
+    <div class="autoHeight" style="width:100% ; height: 20%">
+        <div class="row">
+            <input id="select"  type="file" style="float:left ;" value="select">
         </div>
-        <%--                        output address--%>
-        <div>
-<%--            <input id = "output" type="file" directory >...--%>
+        <%--    remote service info      --%>
+        <div class="row">
+            <label>IP:</label><input type="text" id="IP"><label>PS:</label><input type="password" id = "password"><label>NAME:</label><input type="text" id="name">
+        </div>
+        <%--        upload and compiler                      --%>
+        <div class="row">
+            <label>Dir:</label><input type="text" id = "Dir">
             <button id = "compiler" style="float: left "  >compiler</button>
+        </div>
+        <%--        download file   --%>
+        <div class="row">
+            <label>Local:</label><input type="text" id="local"><label>File:</label><input type="text" id="file"> <button id="download"  style="float: left ">download</button>
         </div>
     </div>
     <%--            code preview--%>

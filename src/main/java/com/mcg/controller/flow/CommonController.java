@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mcg.entity.common.McgResult;
 import com.mcg.entity.flow.Node.NodeText;
 import com.mcg.plugin.ehcache.NodeCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,10 +92,13 @@ public class CommonController extends BaseController {
     	return mcgProduct;
     }
 
-    @RequestMapping(value="getNodeDataById", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value="getNodeById", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public NodeText getNodeDataById() {
         PageData pd = this.getPageData();
+        if(pd.get("flowId") == null || pd.get("id") == null) {
+            return null;
+        }
         return  (NodeText) NodeCache.get(pd.getString("id"));
     }
 
@@ -109,8 +113,11 @@ public class CommonController extends BaseController {
     }
 
     @RequestMapping(value = "/deleteNode" , method = RequestMethod.GET)
-    public void deleteNode(String id){
+    @ResponseBody
+    public McgResult deleteNode(String id){
+        McgResult result = new McgResult();
         NodeCache.del(id);
+        return result;
     }
     
     @RequestMapping(value="/getServerTypes")

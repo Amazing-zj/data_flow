@@ -24,6 +24,8 @@ import java.util.concurrent.Future;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.mcg.entity.flow.Node.NodeText;
+import com.mcg.plugin.ehcache.NodeCache;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -172,10 +174,27 @@ public class FlowController extends BaseController {
         }
 
         message.setBody(notifyBody);
-//        MessagePlugin.push(session.getId(), message); // TODO: 2019/12/23 15:01 dependent process needing remove socket connect relative code
 		return mcgResult;
-	}  
-	
+	}
+
+    @RequestMapping(value="saveNode", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public McgResult saveNode(@Valid @RequestBody NodeText nodeText, BindingResult result, HttpSession session) {
+        Message message = MessagePlugin.getMessage();
+        message.getHeader().setMesType(MessageTypeEnum.NOTIFY);
+        NotifyBody notifyBody = new NotifyBody();
+        McgResult mcgResult = new McgResult();
+
+        if(Tools.validator(result, mcgResult, notifyBody)) {
+            NodeCache.put(nodeText.getNodeId(), nodeText);
+            notifyBody.setContent("文本控件保存成功！");
+            notifyBody.setType(LogTypeEnum.SUCCESS.getValue());
+        }
+
+        message.setBody(notifyBody);
+        return mcgResult;
+    }
+
 //	@RequestMapping(value="saveScript", method=RequestMethod.POST, produces = "application/json;charset=UTF-8")
 //	@ResponseBody
 //	public McgResult saveScript(@Valid @RequestBody FlowScript flowScript, BindingResult result, HttpSession session) {
